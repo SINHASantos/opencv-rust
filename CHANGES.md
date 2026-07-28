@@ -1,6 +1,7 @@
 * 0.99.1
   * Fix argument handling on Windows (fixes https://github.com/twistedfall/opencv-rust/issues/669)
   * Fix module dependency handling for OpenCV 5 (fixes https://github.com/twistedfall/opencv-rust/issues/718)
+  * Fix building with OpenCV 5 on Arch Linux (kudos to matt24smith).
 
 * 0.99.0
   * Add support for OpenCV 5 (new modules: geometry and ptcloud).

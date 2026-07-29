@@ -1,3 +1,8 @@
+* 0.100.0
+  * Drop several functions causing linking issues with OpenCV 5 (kudos to matt24smith).
+  * Arguments of the functions that take filesystem paths are now typed as `impl AsRef<OsStr>` accepting both `Path` and `str` values to improve usability (fixes https://github.com/twistedfall/opencv-rust/issues/681).
+  * Several overloaded functions in `videoio` module now have proper names.
+
 * 0.99.1
   * Fix argument handling on Windows (fixes https://github.com/twistedfall/opencv-rust/issues/669)
   * Fix module dependency handling for OpenCV 5 (fixes https://github.com/twistedfall/opencv-rust/issues/718)

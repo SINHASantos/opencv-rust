@@ -966,7 +966,23 @@ fn videoio_factory() -> HashMap<&'static str, &'static str> {
 			"cv_VideoWriter_VideoWriter_const_StringR_int_int_double_Size_bool",
 			"+_with_backend",
 		),
+		(
+			"cv_VideoWriter_VideoWriter_const_StringR_int_double_const_SizeR_const_vectorLintGR",
+			"+_with_params",
+		),
+		(
+			"cv_VideoWriter_VideoWriter_const_StringR_int_int_double_const_SizeR_const_vectorLintGR",
+			"+_with_backend_params",
+		),
 		("cv_VideoWriter_open_const_StringR_int_int_double_Size_bool", "+_with_backend"),
+		(
+			"cv_VideoWriter_open_const_StringR_int_double_const_SizeR_const_vectorLintGR",
+			"+_with_params",
+		),
+		(
+			"cv_VideoWriter_open_const_StringR_int_int_double_const_SizeR_const_vectorLintGR",
+			"+_with_backend_params",
+		),
 	])
 }
 
@@ -1011,4 +1027,3 @@ fn xobjdetect_factory() -> HashMap<&'static str, &'static str> {
 		),
 	])
 }
-

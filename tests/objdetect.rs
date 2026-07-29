@@ -18,7 +18,7 @@ fn qr_code() -> Result<()> {
 	{
 		#[expect(unused_mut)]
 		let mut detector = objdetect::QRCodeDetector::default()?;
-		let src = imgcodecs::imread(qr_path.to_str().unwrap(), imgcodecs::IMREAD_COLOR)?;
+		let src = imgcodecs::imread(&qr_path, imgcodecs::IMREAD_COLOR)?;
 		let mut pts = Vector::<Point>::new();
 		let mut straight = Mat::default();
 		let res = detector.detect_and_decode(&src, &mut pts, &mut straight)?;
@@ -35,7 +35,7 @@ fn qr_code() -> Result<()> {
 	{
 		#[expect(unused_mut)]
 		let mut detector = objdetect::QRCodeDetector::default()?;
-		let src = imgcodecs::imread(qr_path.to_str().unwrap(), imgcodecs::IMREAD_COLOR)?;
+		let src = imgcodecs::imread(&qr_path, imgcodecs::IMREAD_COLOR)?;
 		let mut pts = Vector::<Point>::new();
 		let res = detector.detect(&src, &mut pts)?;
 		assert!(res);
@@ -56,7 +56,7 @@ fn qr_code() -> Result<()> {
 	{
 		#[expect(unused_mut)]
 		let mut detector = objdetect::QRCodeDetector::default()?;
-		let src = imgcodecs::imread(binary_qr_path.to_str().unwrap(), imgcodecs::IMREAD_COLOR)?;
+		let src = imgcodecs::imread(&binary_qr_path, imgcodecs::IMREAD_COLOR)?;
 		let mut pts = Vector::<Point>::new();
 		let mut straight = Mat::default();
 		let res = detector.detect_and_decode(&src, &mut pts, &mut straight)?;
@@ -72,4 +72,3 @@ fn qr_code() -> Result<()> {
 
 	Ok(())
 }
-

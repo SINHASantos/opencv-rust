@@ -21,19 +21,23 @@ impl RenderLaneTrait for InStringRenderLane<'_, '_> {
 	}
 
 	fn rust_arg_func_decl(&self, name: &str, _lifetime: Lifetime) -> String {
-		let typ = if self.str_type.is_binary() {
-			"&[u8]"
-		} else {
-			"&str"
+		let typ = match self.str_type.encoding() {
+			StrEnc::Text => "&str",
+			StrEnc::Binary => "&[u8]",
+			StrEnc::OsStr => "impl AsRef<OsStr>",
 		};
 		rust_arg_func_decl(name, Constness::Const, typ)
 	}
 
 	fn rust_arg_pre_call(&self, name: &str, function_props: &FunctionProps) -> String {
-		if function_props.is_infallible {
-			format!("extern_container_arg!(nofail {name})")
+		let fail_spec = if function_props.is_infallible {
+			"nofail "
 		} else {
-			format!("extern_container_arg!({name})")
+			""
+		};
+		match self.str_type.encoding() {
+			StrEnc::Text | StrEnc::Binary => format!("extern_container_arg!({fail_spec}{name})"),
+			StrEnc::OsStr => format!("path_arg!({fail_spec}{name})"),
 		}
 	}
 
@@ -75,10 +79,10 @@ impl RenderLaneTrait for OutStringRenderLane<'_, '_> {
 	}
 
 	fn rust_arg_func_decl(&self, name: &str, _lifetime: Lifetime) -> String {
-		let typ = if self.str_type.is_binary() {
-			"&mut Vec<u8>"
-		} else {
-			"&mut String"
+		let typ = match self.str_type.encoding() {
+			StrEnc::Text => "&mut String",
+			StrEnc::Binary => "&mut Vec<u8>",
+			StrEnc::OsStr => "&mut OsString",
 		};
 		rust_arg_func_decl(name, Constness::Const, typ)
 	}
@@ -117,6 +121,7 @@ impl RenderLaneTrait for OutStringRenderLane<'_, '_> {
 					| TypeRefTypeHint::Slice
 					| TypeRefTypeHint::LenForSlice(_, _)
 					| TypeRefTypeHint::StringAsBytes(_)
+					| TypeRefTypeHint::StringAsPath
 					| TypeRefTypeHint::CharAsRustChar
 					| TypeRefTypeHint::CharPtrSingleChar
 					| TypeRefTypeHint::PrimitivePtrAsRaw
@@ -149,21 +154,23 @@ impl RenderLaneTrait for OutStringRenderLane<'_, '_> {
 			StrType::StdString(StrEnc::Text) | StrType::CvString(StrEnc::Text) => {
 				format!("*{name} = ocvrs_create_string({name}_out.c_str())")
 			}
+			StrType::CharPtr(StrEnc::Text) => {
+				format!("*{name} = ocvrs_create_string({name}_out.get())")
+			}
 			StrType::StdString(StrEnc::Binary) => {
 				format!("*{name} = ocvrs_create_byte_string({name}_out.data(), {name}_out.size())")
 			}
 			StrType::CvString(StrEnc::Binary) => {
 				format!("*{name} = ocvrs_create_byte_string({name}_out.begin(), {name}_out.size())")
 			}
-			StrType::CharPtr(StrEnc::Text) => {
-				format!("*{name} = ocvrs_create_string({name}_out.get())")
-			}
 			StrType::CharPtr(StrEnc::Binary) => {
-				if let TypeRefTypeHint::StringAsBytes(Some(len_arg_name)) = self.canonical.type_hint() {
-					format!("*{name} = ocvrs_create_byte_string({name}_out.get(), {len_arg_name})")
-				} else {
+				let TypeRefTypeHint::StringAsBytes(Some(len_arg_name)) = self.canonical.type_hint() else {
 					panic!("Output argument of type `char*` with binary encoding must have `len` argument specified")
-				}
+				};
+				format!("*{name} = ocvrs_create_byte_string({name}_out.get(), {len_arg_name})")
+			}
+			StrType::StdString(StrEnc::OsStr) | StrType::CvString(StrEnc::OsStr) | StrType::CharPtr(_) => {
+				panic!("Output string argument with OsStr encoding is not supported")
 			}
 		}
 	}

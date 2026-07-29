@@ -493,26 +493,17 @@ impl fmt::Debug for TypeRef<'_, '_> {
 					str_type
 				}
 			};
-			match str_type {
-				StrType::StdString(StrEnc::Text) => {
-					props.push("std_string");
-				}
-				StrType::CvString(StrEnc::Text) => {
-					props.push("cv_string");
-				}
-				StrType::CharPtr(StrEnc::Text) => {
-					props.push("char_ptr_string");
-				}
-				StrType::StdString(StrEnc::Binary) => {
-					props.push("byte_std_string");
-				}
-				StrType::CvString(StrEnc::Binary) => {
-					props.push("byte_cv_string");
-				}
-				StrType::CharPtr(StrEnc::Binary) => {
-					props.push("byte_ptr_string");
-				}
-			}
+			props.push(match str_type {
+				StrType::StdString(StrEnc::Text) => "std_string",
+				StrType::CvString(StrEnc::Text) => "cv_string",
+				StrType::CharPtr(StrEnc::Text) => "char_ptr_string",
+				StrType::StdString(StrEnc::Binary) => "byte_std_string",
+				StrType::CvString(StrEnc::Binary) => "byte_cv_string",
+				StrType::CharPtr(StrEnc::Binary) => "byte_ptr_string",
+				StrType::StdString(StrEnc::OsStr) => "osstr_std_string",
+				StrType::CvString(StrEnc::OsStr) => "osstr_cv_string",
+				StrType::CharPtr(StrEnc::OsStr) => "osstr_ptr_string",
+			})
 		}
 		if kind.as_by_move().is_some() {
 			props.push("by_move");

@@ -6,6 +6,7 @@
 // todo public static properties like opencv2/core/base.hpp:384 Hamming::normType
 // todo test returning reference to array like cv_MatStep_buf
 // todo, allow extension of simple classes for e.g. Elliptic_KeyPoint
+// todo OCRTesseract::create should have nullable params
 // fixme vector<Mat*> get's interpreted as Vector<Mat> which should be wrong (e.g. Layer::forward and Layer::apply_halide_scheduler)
 // fixme MatConstIterator::m return Mat**, is it handled correctly?
 // fixme VectorOfMat::get allows mutation

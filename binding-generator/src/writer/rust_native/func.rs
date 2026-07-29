@@ -789,15 +789,16 @@ pub fn cpp_return_map<'f>(return_type: &TypeRef, name: &'f str, is_constructor: 
 		("".into(), false)
 	} else if let Some((_, string_type)) = return_kind.as_string(return_type.type_hint()) {
 		let str_mk = match string_type {
-			StrType::StdString(StrEnc::Text) | StrType::CvString(StrEnc::Text) => {
-				format!("ocvrs_create_string({name}.c_str())").into()
-			}
-			StrType::StdString(StrEnc::Binary) => format!("ocvrs_create_byte_string({name}.data(), {name}.size())").into(),
-			StrType::CvString(StrEnc::Binary) => format!("ocvrs_create_byte_string({name}.begin(), {name}.size())").into(),
-			StrType::CharPtr(StrEnc::Text) => format!("ocvrs_create_string({name})").into(),
+			StrType::StdString(StrEnc::Text) | StrType::CvString(StrEnc::Text) => format!("ocvrs_create_string({name}.c_str())"),
+			StrType::StdString(StrEnc::Binary) => format!("ocvrs_create_byte_string({name}.data(), {name}.size())"),
+			StrType::CvString(StrEnc::Binary) => format!("ocvrs_create_byte_string({name}.begin(), {name}.size())"),
+			StrType::CharPtr(StrEnc::Text) => format!("ocvrs_create_string({name})"),
 			StrType::CharPtr(StrEnc::Binary) => panic!("Returning a byte string via char* is not supported yet"),
+			StrType::StdString(StrEnc::OsStr) | StrType::CvString(StrEnc::OsStr) | StrType::CharPtr(StrEnc::OsStr) => {
+				panic!("Returning a path string is not supported yet")
+			}
 		};
-		(str_mk, false)
+		(str_mk.into(), false)
 	} else if return_kind.extern_pass_kind().is_by_void_ptr() && !is_constructor {
 		let ret_source = return_type.source();
 		let out = ret_source.kind().as_class().filter(|cls| cls.is_abstract()).map_or_else(

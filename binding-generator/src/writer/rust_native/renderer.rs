@@ -3,7 +3,7 @@ use std::fmt::Write;
 
 use crate::renderer::TypeRefRenderer;
 use crate::type_ref::{
-	Constness, CppNameStyle, Dir, ExternDir, FishStyle, NameStyle, StrType, TemplateArg, TypeRef, TypeRefDesc, TypeRefKind,
+	Constness, CppNameStyle, Dir, ExternDir, FishStyle, NameStyle, StrEnc, StrType, TemplateArg, TypeRef, TypeRefDesc, TypeRefKind,
 };
 use crate::writer::rust_native::class::ClassExt;
 use crate::writer::rust_native::element::RustElement;
@@ -72,10 +72,10 @@ impl TypeRefRenderer<'_> for RustRenderer {
 	fn render<'t>(self, type_ref: &'t TypeRef) -> Cow<'t, str> {
 		let kind = type_ref.kind();
 		if let Some((_, str_type)) = kind.as_string(type_ref.type_hint()) {
-			if str_type.is_binary() {
-				format!("Vec{fish}<u8>", fish = self.name_style.turbo_fish_style().rust_qual()).into()
-			} else {
-				"String".into()
+			match str_type.encoding() {
+				StrEnc::Text => "String".into(),
+				StrEnc::Binary => format!("Vec{fish}<u8>", fish = self.name_style.turbo_fish_style().rust_qual()).into(),
+				StrEnc::OsStr => "PathBuf".into(),
 			}
 		} else {
 			kind.map_borrowed(|kind| match kind {

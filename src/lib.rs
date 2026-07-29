@@ -33,7 +33,7 @@ pub mod platform_types {
 
 /// Prelude for sys (externs) module and types
 pub mod mod_prelude_sys {
-	pub use std::ffi::{c_char, c_void};
+	pub use core::ffi::{c_char, c_void};
 
 	pub use crate::platform_types::*;
 	pub use crate::traits::{Boxed, OpenCVFromExtern, OpenCVIntoExternContainer, OpenCVTypeExternContainer};
@@ -41,6 +41,7 @@ pub mod mod_prelude_sys {
 
 /// Prelude for generated modules and types
 pub mod mod_prelude {
+	pub use std::ffi::OsStr;
 	pub use std::marker::PhantomData;
 
 	pub use crate::boxed_ref::{BoxedRef, BoxedRefMut};

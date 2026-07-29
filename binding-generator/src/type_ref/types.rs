@@ -21,6 +21,8 @@ pub enum TypeRefTypeHint {
 	LenForSlice(Arc<[String]>, usize),
 	/// Treat C++ string as a byte buffer (`Vec<u8>`) instead of an actual string, argument is optional cpp_arg_name of the argument that specifies the buffer byte length
 	StringAsBytes(Option<Arc<str>>),
+	/// Treat C++ string as a file path, done heuristically based on the argument name
+	StringAsPath,
 	/// String len is passed in an additional argument (cpp_arg_name)
 	StringWithLen(Rc<str>),
 	/// when C++ char needs to be represented as Rust char
@@ -60,6 +62,7 @@ impl TypeRefTypeHint {
 			| Self::Slice
 			| Self::LenForSlice(_, _)
 			| Self::StringAsBytes(_)
+			| Self::StringAsPath
 			| Self::StringWithLen(_)
 			| Self::CharAsRustChar
 			| Self::CharPtrSingleChar
@@ -78,6 +81,7 @@ impl TypeRefTypeHint {
 			| Self::Slice
 			| Self::LenForSlice(_, _)
 			| Self::StringAsBytes(_)
+			| Self::StringAsPath
 			| Self::StringWithLen(_)
 			| Self::CharAsRustChar
 			| Self::CharPtrSingleChar
@@ -244,14 +248,13 @@ pub enum StrType {
 impl StrType {
 	pub fn set_encoding(&mut self, enc: StrEnc) {
 		match self {
-			StrType::StdString(old_enc) | StrType::CvString(old_enc) | StrType::CharPtr(old_enc) => *old_enc = enc,
+			Self::StdString(old_enc) | Self::CvString(old_enc) | Self::CharPtr(old_enc) => *old_enc = enc,
 		}
 	}
 
-	pub fn is_binary(&self) -> bool {
+	pub fn encoding(&self) -> StrEnc {
 		match self {
-			StrType::StdString(StrEnc::Binary) | StrType::CvString(StrEnc::Binary) | StrType::CharPtr(StrEnc::Binary) => true,
-			StrType::StdString(StrEnc::Text) | StrType::CvString(StrEnc::Text) | StrType::CharPtr(StrEnc::Text) => false,
+			Self::StdString(enc) | Self::CvString(enc) | Self::CharPtr(enc) => *enc,
 		}
 	}
 }
@@ -259,8 +262,10 @@ impl StrType {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum StrEnc {
 	Text,
-	/// string with binary data, e.g. can contain 0 byte
+	/// string with binary data (=== [Vec<u8>]), can contain 0 byte
 	Binary,
+	/// OS-specific encoding (== [std::ffi::OsString]), used to pass filesystem paths for example
+	OsStr,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

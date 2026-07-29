@@ -491,31 +491,21 @@ impl<'tu, 'ge> Func<'tu, 'ge> {
 					.into_iter()
 					.enumerate()
 					.map(|(idx, a)| {
+						let arg_name = a.get_name();
 						if let Some(func_arg_override) = arg_overrides
-							&& let Some(type_hint) = a.get_name().and_then(|arg_name| func_arg_override.get(arg_name.as_str()))
+							&& let Some(type_hint) = arg_name.as_deref().and_then(|arg_name| func_arg_override.get(arg_name))
 						{
 							return Field::new_ext(a, type_hint.clone(), gen_env);
 						}
-						let out = Field::new(a, gen_env);
-						slice_arg_finder.feed(idx, &out);
-						out
+						let mut arg = Field::new(a, gen_env);
+						if let Some(arg_name) = arg_name.as_deref() {
+							update_path_argument(&mut arg, arg_name);
+						}
+						slice_arg_finder.feed(idx, &arg);
+						arg
 					})
 					.collect::<Vec<_>>();
-				for (slice_arg_indices, slice_len_arg_idx) in slice_arg_finder.finish() {
-					let mut slice_arg_names = Vec::with_capacity(slice_arg_indices.len());
-					for &slice_arg_idx in &slice_arg_indices {
-						let slice_arg = &mut out[slice_arg_idx];
-						slice_arg_names.push(slice_arg.rust_name(NameStyle::ref_()).into_owned());
-						slice_arg.set_type_ref_type_hint(TypeRefTypeHint::Slice);
-					}
-					let slice_len_arg = &mut out[slice_len_arg_idx];
-					let divisor = if slice_len_arg.cpp_name(CppNameStyle::Declaration).contains("pair") {
-						2
-					} else {
-						1
-					};
-					slice_len_arg.set_type_ref_type_hint(TypeRefTypeHint::LenForSlice(slice_arg_names.into(), divisor));
-				}
+				update_slice_arguments(&mut out, slice_arg_finder);
 				Owned(out)
 			}
 			Self::Desc(desc) => Borrowed(desc.arguments.as_ref()),
@@ -872,5 +862,55 @@ impl InheritConfig {
 
 	pub fn any_enabled(self) -> bool {
 		self.kind || self.name || self.arguments || self.doc_comment || self.return_type_ref || self.definition_location
+	}
+}
+
+/// Checks whether the `arg_name` is a name of the argument that's expected to receive a filesystem path, and adds a corresponding
+/// type hint to `field` if so.
+fn update_path_argument(field: &mut Field, arg_name: &str) {
+	const CHECK_SUFFIXES: [&str; 5] = ["file", "filename", "file_name", "path", "pathorname"];
+	const CHECK_PREFIXES: [&str; 2] = ["pathto", "path_to"];
+
+	let len = arg_name.len();
+	let arg_name_matched = CHECK_SUFFIXES
+		.into_iter()
+		.filter(|suf| suf.len() <= len)
+		.flat_map(|suf| {
+			arg_name
+				.get(len - suf.len()..)
+				.filter(|suf_check| suf_check.eq_ignore_ascii_case(suf))
+		})
+		.chain(CHECK_PREFIXES.into_iter().flat_map(|pref| {
+			arg_name
+				.get(..pref.len())
+				.filter(|pref_check| pref_check.eq_ignore_ascii_case(pref))
+		}))
+		.next()
+		.is_some();
+	if arg_name_matched {
+		field.set_type_ref_type_hint(TypeRefTypeHint::StringAsPath);
+		return;
+	}
+
+	if arg_name == "filenames" || arg_name == "paths" {
+		// todo: add support for Vector<impl Into<OsStr>>
+	}
+}
+
+fn update_slice_arguments(arguments: &mut [Field], slice_arg_finder: SliceArgFinder) {
+	for (slice_arg_indices, slice_len_arg_idx) in slice_arg_finder.finish() {
+		let mut slice_arg_names = Vec::with_capacity(slice_arg_indices.len());
+		for &slice_arg_idx in &slice_arg_indices {
+			let slice_arg = &mut arguments[slice_arg_idx];
+			slice_arg_names.push(slice_arg.rust_name(NameStyle::ref_()).into_owned());
+			slice_arg.set_type_ref_type_hint(TypeRefTypeHint::Slice);
+		}
+		let slice_len_arg = &mut arguments[slice_len_arg_idx];
+		let divisor = if slice_len_arg.cpp_name(CppNameStyle::Declaration).contains("pair") {
+			2
+		} else {
+			1
+		};
+		slice_len_arg.set_type_ref_type_hint(TypeRefTypeHint::LenForSlice(slice_arg_names.into(), divisor));
 	}
 }

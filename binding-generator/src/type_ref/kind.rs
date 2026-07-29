@@ -260,10 +260,12 @@ impl<'tu, 'ge> TypeRefKind<'tu, 'ge> {
 			TypeRefKind::Typedef(tdef) => tdef.underlying_type_ref().kind().as_string(type_hint),
 			_ => None,
 		};
-		if let Some((_, str_type)) = out.as_mut()
-			&& matches!(type_hint, TypeRefTypeHint::StringAsBytes(_))
-		{
-			str_type.set_encoding(StrEnc::Binary)
+		if let Some((_, str_type)) = out.as_mut() {
+			match type_hint {
+				TypeRefTypeHint::StringAsBytes(_) => str_type.set_encoding(StrEnc::Binary),
+				TypeRefTypeHint::StringAsPath => str_type.set_encoding(StrEnc::OsStr),
+				_ => {}
+			}
 		}
 		out
 	}

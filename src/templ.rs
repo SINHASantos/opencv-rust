@@ -109,6 +109,17 @@ macro_rules! smart_ptr_option_arg {
 	};
 }
 
+macro_rules! path_arg {
+	(nofail $name: ident) => {
+		let $name = $name.as_ref();
+		extern_container_arg!(nofail $name);
+	};
+	($name: ident) => {
+		let $name = $name.as_ref();
+		extern_container_arg!($name);
+	};
+}
+
 macro_rules! return_send {
 	(via $name: ident) => {
 		let mut $name = ::std::mem::MaybeUninit::uninit();

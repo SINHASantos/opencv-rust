@@ -1,4 +1,4 @@
-use std::ffi::{CString, c_char, c_void};
+use std::ffi::{CString, OsStr, c_char, c_void};
 
 use super::{OpenCVIntoExternContainer, OpenCVType, OpenCVTypeExternContainer};
 use crate::templ::receive_string;
@@ -103,5 +103,17 @@ impl OpenCVTypeExternContainer for Vec<u8> {
 	#[inline]
 	fn opencv_as_extern_mut(&mut self) -> Self::ExternSendMut {
 		self.as_mut_ptr()
+	}
+}
+
+impl OpenCVIntoExternContainer for &OsStr {
+	type ExternContainer = CString;
+
+	fn opencv_into_extern_container(self) -> crate::Result<Self::ExternContainer> {
+		CString::new(self.as_encoded_bytes()).map_err(|e| e.into())
+	}
+
+	fn opencv_into_extern_container_nofail(self) -> Self::ExternContainer {
+		cstring_new_nofail(self.as_encoded_bytes())
 	}
 }

@@ -1,3 +1,6 @@
+* 0.100.1
+  * Fix generation of the `DrawLinesMatchesFlags` enum with Apple clang.
+
 * 0.100.0
   * Drop several functions causing linking issues with OpenCV 5 (kudos to matt24smith).
   * Arguments of the functions that take filesystem paths are now typed as `impl AsRef<OsStr>` accepting both `Path` and `str` values to improve usability (fixes https://github.com/twistedfall/opencv-rust/issues/681).

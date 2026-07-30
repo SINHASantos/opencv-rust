@@ -93,8 +93,8 @@ pub mod dnn_superres {
 		/// ## Parameters
 		/// * path: Path to the model file.
 		#[inline]
-		fn read_model(&mut self, path: &str) -> Result<()> {
-			extern_container_arg!(path);
+		fn read_model(&mut self, path: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_dnn_superres_DnnSuperResImpl_readModel_const_StringR(self.as_raw_mut_DnnSuperResImpl(), path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

@@ -5230,10 +5230,10 @@ pub mod core {
 	/// ## See also
 	/// CV_Error, CV_Error_, CV_Assert, CV_DbgAssert
 	#[inline]
-	pub fn error_1(code: core::Code, err: &str, func: &str, file: &str, line: i32) -> Result<()> {
+	pub fn error_1(code: core::Code, err: &str, func: &str, file: impl AsRef<OsStr>, line: i32) -> Result<()> {
 		extern_container_arg!(err);
 		extern_container_arg!(func);
-		extern_container_arg!(file);
+		path_arg!(file);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_error_Code_const_StringR_const_charX_const_charX_int(code, err.opencv_as_extern(), func.opencv_as_extern(), file.opencv_as_extern(), line, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -6320,9 +6320,9 @@ pub mod core {
 	/// * filename: NULL
 	/// * line: 0
 	#[inline]
-	pub fn set_ipp_status(status: i32, funcname: &str, filename: &str, line: i32) -> Result<()> {
+	pub fn set_ipp_status(status: i32, funcname: &str, filename: impl AsRef<OsStr>, line: i32) -> Result<()> {
 		extern_container_arg!(funcname);
-		extern_container_arg!(filename);
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_ipp_setIppStatus_int_const_charX_const_charX_int(status, funcname.opencv_as_extern(), filename.opencv_as_extern(), line, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -10121,8 +10121,8 @@ pub mod core {
 	/// ## Parameters
 	/// * path: Path to used samples data
 	#[inline]
-	pub fn add_samples_data_search_path(path: &str) -> Result<()> {
-		extern_container_arg!(path);
+	pub fn add_samples_data_search_path(path: impl AsRef<OsStr>) -> Result<()> {
+		path_arg!(path);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_samples_addSamplesDataSearchPath_const_StringR(path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -10151,8 +10151,8 @@ pub mod core {
 	/// This alternative version of [find_file_or_keep] function uses the following default values for its arguments:
 	/// * silent_mode: false
 	#[inline]
-	pub fn find_file_or_keep_def(relative_path: &str) -> Result<String> {
-		extern_container_arg!(relative_path);
+	pub fn find_file_or_keep_def(relative_path: impl AsRef<OsStr>) -> Result<String> {
+		path_arg!(relative_path);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_samples_findFileOrKeep_const_StringR(relative_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -10164,8 +10164,8 @@ pub mod core {
 	/// ## C++ default parameters
 	/// * silent_mode: false
 	#[inline]
-	pub fn find_file_or_keep(relative_path: &str, silent_mode: bool) -> Result<String> {
-		extern_container_arg!(relative_path);
+	pub fn find_file_or_keep(relative_path: impl AsRef<OsStr>, silent_mode: bool) -> Result<String> {
+		path_arg!(relative_path);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_samples_findFileOrKeep_const_StringR_bool(relative_path.opencv_as_extern(), silent_mode, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -10204,8 +10204,8 @@ pub mod core {
 	/// * required: true
 	/// * silent_mode: false
 	#[inline]
-	pub fn find_file_def(relative_path: &str) -> Result<String> {
-		extern_container_arg!(relative_path);
+	pub fn find_file_def(relative_path: impl AsRef<OsStr>) -> Result<String> {
+		path_arg!(relative_path);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_samples_findFile_const_StringR(relative_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -10243,8 +10243,8 @@ pub mod core {
 	/// * required: true
 	/// * silent_mode: false
 	#[inline]
-	pub fn find_file(relative_path: &str, required: bool, silent_mode: bool) -> Result<String> {
-		extern_container_arg!(relative_path);
+	pub fn find_file(relative_path: impl AsRef<OsStr>, required: bool, silent_mode: bool) -> Result<String> {
+		path_arg!(relative_path);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_samples_findFile_const_StringR_bool_bool(relative_path.opencv_as_extern(), required, silent_mode, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -11033,10 +11033,10 @@ pub mod core {
 	/// ## See also
 	/// CV_AssertTerminate
 	#[inline]
-	pub fn terminate(code: core::Code, err: &str, func: &str, file: &str, line: i32) {
+	pub fn terminate(code: core::Code, err: &str, func: &str, file: impl AsRef<OsStr>, line: i32) {
 		extern_container_arg!(nofail err);
 		extern_container_arg!(nofail func);
-		extern_container_arg!(nofail file);
+		path_arg!(nofail file);
 		let ret = unsafe { sys::cv_terminate_Code_const_StringR_const_charX_const_charX_int(code, err.opencv_as_extern(), func.opencv_as_extern(), file.opencv_as_extern(), line) };
 		ret
 	}
@@ -11557,9 +11557,9 @@ pub mod core {
 
 	/// Write log message
 	#[inline]
-	pub fn write_log_message_ex(log_level: core::LogLevel, tag: &str, file: &str, line: i32, func: &str, message: &str) -> Result<()> {
+	pub fn write_log_message_ex(log_level: core::LogLevel, tag: &str, file: impl AsRef<OsStr>, line: i32, func: &str, message: &str) -> Result<()> {
 		extern_container_arg!(tag);
-		extern_container_arg!(file);
+		path_arg!(file);
 		extern_container_arg!(func);
 		extern_container_arg!(message);
 		return_send!(via ocvrs_return);
@@ -12152,8 +12152,8 @@ pub mod core {
 		/// Saves the algorithm to a file.
 		/// In order to make this method work, the derived class must implement Algorithm::write(FileStorage& fs).
 		#[inline]
-		fn save(&self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn save(&self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_Algorithm_save_const_const_StringR(self.as_raw_Algorithm(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -14165,10 +14165,10 @@ pub mod core {
 		/// Full constructor. Normally the constructor is not called explicitly.
 		/// Instead, the macros CV_Error(), CV_Error_() and CV_Assert() are used.
 		#[inline]
-		pub fn new(_code: core::Code, _err: &str, _func: &str, _file: &str, _line: i32) -> Result<core::Exception> {
+		pub fn new(_code: core::Code, _err: &str, _func: &str, _file: impl AsRef<OsStr>, _line: i32) -> Result<core::Exception> {
 			extern_container_arg!(_err);
 			extern_container_arg!(_func);
-			extern_container_arg!(_file);
+			path_arg!(_file);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_Exception_Exception_Code_const_stringR_const_stringR_const_stringR_int(_code, _err.opencv_as_extern(), _func.opencv_as_extern(), _file.opencv_as_extern(), _line, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -15104,8 +15104,8 @@ pub mod core {
 		/// ## C++ default parameters
 		/// * encoding: String()
 		#[inline]
-		pub fn new(filename: &str, flags: i32, encoding: &str) -> Result<core::FileStorage> {
-			extern_container_arg!(filename);
+		pub fn new(filename: impl AsRef<OsStr>, flags: i32, encoding: &str) -> Result<core::FileStorage> {
+			path_arg!(filename);
 			extern_container_arg!(encoding);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_FileStorage_FileStorage_const_StringR_int_const_StringR(filename.opencv_as_extern(), flags, encoding.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -15128,8 +15128,8 @@ pub mod core {
 		/// This alternative version of [new] function uses the following default values for its arguments:
 		/// * encoding: String()
 		#[inline]
-		pub fn new_def(filename: &str, flags: i32) -> Result<core::FileStorage> {
-			extern_container_arg!(filename);
+		pub fn new_def(filename: impl AsRef<OsStr>, flags: i32) -> Result<core::FileStorage> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_FileStorage_FileStorage_const_StringR_int(filename.opencv_as_extern(), flags, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -15144,8 +15144,8 @@ pub mod core {
 		/// ## Returns
 		/// The normalized object name.
 		#[inline]
-		pub fn get_default_object_name(filename: &str) -> Result<String> {
-			extern_container_arg!(filename);
+		pub fn get_default_object_name(filename: impl AsRef<OsStr>) -> Result<String> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_FileStorage_getDefaultObjectName_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -15327,8 +15327,8 @@ pub mod core {
 		/// ## C++ default parameters
 		/// * encoding: String()
 		#[inline]
-		fn open(&mut self, filename: &str, flags: i32, encoding: &str) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open(&mut self, filename: impl AsRef<OsStr>, flags: i32, encoding: &str) -> Result<bool> {
+			path_arg!(filename);
 			extern_container_arg!(encoding);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_FileStorage_open_const_StringR_int_const_StringR(self.as_raw_mut_FileStorage(), filename.opencv_as_extern(), flags, encoding.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -15361,8 +15361,8 @@ pub mod core {
 		/// This alternative version of [FileStorageTrait::open] function uses the following default values for its arguments:
 		/// * encoding: String()
 		#[inline]
-		fn open_def(&mut self, filename: &str, flags: i32) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_def(&mut self, filename: impl AsRef<OsStr>, flags: i32) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_FileStorage_open_const_StringR_int(self.as_raw_mut_FileStorage(), filename.opencv_as_extern(), flags, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -16470,8 +16470,8 @@ pub mod core {
 
 		/// Serializes this object to a given filename.
 		#[inline]
-		fn save(&self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn save(&self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_LDA_save_const_const_StringR(self.as_raw_LDA(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -16519,8 +16519,8 @@ pub mod core {
 
 		/// Deserializes this object from a given filename.
 		#[inline]
-		fn load(&mut self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn load(&mut self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_LDA_load_const_StringR(self.as_raw_mut_LDA(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -31641,61 +31641,7 @@ pub mod core {
 		/// * allow_transposed: false
 		/// * fixed_depth_mask: static_cast<_OutputArray::DepthMask>(0)
 		#[inline]
-		fn fit(&self, sz: core::Size, typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask) -> Result<()> {
-			return_send!(via ocvrs_return);
-			unsafe { sys::cv__OutputArray_fit_const_Size_int_int_bool_DepthMask(self.as_raw__OutputArray(), &sz, typ, i, allow_transposed, fixed_depth_mask, ocvrs_return.as_mut_ptr()) };
-			return_receive!(ocvrs_return => ret);
-			let ret = ret.into_result()?;
-			Ok(ret)
-		}
-
-		/// ## Note
-		/// This alternative version of [_OutputArrayTraitConst::fit] function uses the following default values for its arguments:
-		/// * i: -1
-		/// * allow_transposed: false
-		/// * fixed_depth_mask: static_cast<_OutputArray::DepthMask>(0)
-		#[inline]
-		fn fit_def(&self, sz: core::Size, typ: i32) -> Result<()> {
-			return_send!(via ocvrs_return);
-			unsafe { sys::cv__OutputArray_fit_const_Size_int(self.as_raw__OutputArray(), &sz, typ, ocvrs_return.as_mut_ptr()) };
-			return_receive!(ocvrs_return => ret);
-			let ret = ret.into_result()?;
-			Ok(ret)
-		}
-
-		/// ## C++ default parameters
-		/// * i: -1
-		/// * allow_transposed: false
-		/// * fixed_depth_mask: static_cast<_OutputArray::DepthMask>(0)
-		#[inline]
-		fn fit_1(&self, rows: i32, cols: i32, typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask) -> Result<()> {
-			return_send!(via ocvrs_return);
-			unsafe { sys::cv__OutputArray_fit_const_int_int_int_int_bool_DepthMask(self.as_raw__OutputArray(), rows, cols, typ, i, allow_transposed, fixed_depth_mask, ocvrs_return.as_mut_ptr()) };
-			return_receive!(ocvrs_return => ret);
-			let ret = ret.into_result()?;
-			Ok(ret)
-		}
-
-		/// ## Note
-		/// This alternative version of [_OutputArrayTraitConst::fit] function uses the following default values for its arguments:
-		/// * i: -1
-		/// * allow_transposed: false
-		/// * fixed_depth_mask: static_cast<_OutputArray::DepthMask>(0)
-		#[inline]
-		fn fit_def_1(&self, rows: i32, cols: i32, typ: i32) -> Result<()> {
-			return_send!(via ocvrs_return);
-			unsafe { sys::cv__OutputArray_fit_const_int_int_int(self.as_raw__OutputArray(), rows, cols, typ, ocvrs_return.as_mut_ptr()) };
-			return_receive!(ocvrs_return => ret);
-			let ret = ret.into_result()?;
-			Ok(ret)
-		}
-
-		/// ## C++ default parameters
-		/// * i: -1
-		/// * allow_transposed: false
-		/// * fixed_depth_mask: static_cast<_OutputArray::DepthMask>(0)
-		#[inline]
-		fn fit_2(&self, size: &[i32], typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask) -> Result<()> {
+		fn fit(&self, size: &[i32], typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask) -> Result<()> {
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv__OutputArray_fit_const_int_const_intX_int_int_bool_DepthMask(self.as_raw__OutputArray(), size.len().try_into()?, size.as_ptr(), typ, i, allow_transposed, fixed_depth_mask, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -31709,46 +31655,9 @@ pub mod core {
 		/// * allow_transposed: false
 		/// * fixed_depth_mask: static_cast<_OutputArray::DepthMask>(0)
 		#[inline]
-		fn fit_def_2(&self, size: &[i32], typ: i32) -> Result<()> {
+		fn fit_def(&self, size: &[i32], typ: i32) -> Result<()> {
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv__OutputArray_fit_const_int_const_intX_int(self.as_raw__OutputArray(), size.len().try_into()?, size.as_ptr(), typ, ocvrs_return.as_mut_ptr()) };
-			return_receive!(ocvrs_return => ret);
-			let ret = ret.into_result()?;
-			Ok(ret)
-		}
-
-		/// ## C++ default parameters
-		/// * i: -1
-		/// * allow_transposed: false
-		/// * fixed_depth_mask: static_cast<_OutputArray::DepthMask>(0)
-		#[inline]
-		fn fit_3(&self, shape: core::MatShape, typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask) -> Result<()> {
-			return_send!(via ocvrs_return);
-			unsafe { sys::cv__OutputArray_fit_const_const_MatShapeR_int_int_bool_DepthMask(self.as_raw__OutputArray(), &shape, typ, i, allow_transposed, fixed_depth_mask, ocvrs_return.as_mut_ptr()) };
-			return_receive!(ocvrs_return => ret);
-			let ret = ret.into_result()?;
-			Ok(ret)
-		}
-
-		/// ## Note
-		/// This alternative version of [_OutputArrayTraitConst::fit] function uses the following default values for its arguments:
-		/// * i: -1
-		/// * allow_transposed: false
-		/// * fixed_depth_mask: static_cast<_OutputArray::DepthMask>(0)
-		#[inline]
-		fn fit_def_3(&self, shape: core::MatShape, typ: i32) -> Result<()> {
-			return_send!(via ocvrs_return);
-			unsafe { sys::cv__OutputArray_fit_const_const_MatShapeR_int(self.as_raw__OutputArray(), &shape, typ, ocvrs_return.as_mut_ptr()) };
-			return_receive!(ocvrs_return => ret);
-			let ret = ret.into_result()?;
-			Ok(ret)
-		}
-
-		#[inline]
-		fn fit_same_size(&self, arr: &impl ToInputArray, mtype: i32) -> Result<()> {
-			input_array_arg!(arr);
-			return_send!(via ocvrs_return);
-			unsafe { sys::cv__OutputArray_fitSameSize_const_const__InputArrayR_int(self.as_raw__OutputArray(), arr.as_raw__InputArray(), mtype, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
 			let ret = ret.into_result()?;
 			Ok(ret)
@@ -36139,9 +36048,9 @@ pub mod core {
 		/// * instr_type: TYPE_GENERAL
 		/// * impl_type: IMPL_PLAIN
 		#[inline]
-		pub unsafe fn new(fun_name: &str, file_name: &str, line_num: i32, ret_address: *mut c_void, always_expand: bool, instr_type: core::TYPE, impl_type: core::IMPL) -> Result<core::NodeData> {
+		pub unsafe fn new(fun_name: &str, file_name: impl AsRef<OsStr>, line_num: i32, ret_address: *mut c_void, always_expand: bool, instr_type: core::TYPE, impl_type: core::IMPL) -> Result<core::NodeData> {
 			extern_container_arg!(fun_name);
-			extern_container_arg!(file_name);
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_instr_NodeData_NodeData_const_charX_const_charX_int_voidX_bool_TYPE_IMPL(fun_name.opencv_as_extern(), file_name.opencv_as_extern(), line_num, ret_address, always_expand, instr_type, impl_type, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

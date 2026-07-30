@@ -46,8 +46,8 @@ pub mod superres {
 	}
 
 	#[inline]
-	pub fn create_frame_source_video_cuda(file_name: &str) -> Result<core::Ptr<crate::superres::SuperRes_FrameSource>> {
-		extern_container_arg!(file_name);
+	pub fn create_frame_source_video_cuda(file_name: impl AsRef<OsStr>) -> Result<core::Ptr<crate::superres::SuperRes_FrameSource>> {
+		path_arg!(file_name);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_superres_createFrameSource_Video_CUDA_const_StringR(file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -57,8 +57,8 @@ pub mod superres {
 	}
 
 	#[inline]
-	pub fn create_frame_source_video(file_name: &str) -> Result<core::Ptr<crate::superres::SuperRes_FrameSource>> {
-		extern_container_arg!(file_name);
+	pub fn create_frame_source_video(file_name: impl AsRef<OsStr>) -> Result<core::Ptr<crate::superres::SuperRes_FrameSource>> {
+		path_arg!(file_name);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_superres_createFrameSource_Video_const_StringR(file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);

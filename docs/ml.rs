@@ -558,8 +558,8 @@ pub mod ml {
 		/// ## Parameters
 		/// * filepath: path to serialized ANN
 		#[inline]
-		pub fn load(filepath: &str) -> Result<core::Ptr<crate::ml::ANN_MLP>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::ANN_MLP>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_ANN_MLP_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1124,8 +1124,8 @@ pub mod ml {
 		/// ## C++ default parameters
 		/// * node_name: String()
 		#[inline]
-		pub fn load(filepath: &str, node_name: &str) -> Result<core::Ptr<crate::ml::Boost>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>, node_name: &str) -> Result<core::Ptr<crate::ml::Boost>> {
+			path_arg!(filepath);
 			extern_container_arg!(node_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_Boost_load_const_StringR_const_StringR(filepath.opencv_as_extern(), node_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -1149,8 +1149,8 @@ pub mod ml {
 		/// This alternative version of [Boost::load] function uses the following default values for its arguments:
 		/// * node_name: String()
 		#[inline]
-		pub fn load_def(filepath: &str) -> Result<core::Ptr<crate::ml::Boost>> {
-			extern_container_arg!(filepath);
+		pub fn load_def(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::Boost>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_Boost_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1359,8 +1359,8 @@ pub mod ml {
 		/// ## C++ default parameters
 		/// * node_name: String()
 		#[inline]
-		pub fn load(filepath: &str, node_name: &str) -> Result<core::Ptr<crate::ml::DTrees>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>, node_name: &str) -> Result<core::Ptr<crate::ml::DTrees>> {
+			path_arg!(filepath);
 			extern_container_arg!(node_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_DTrees_load_const_StringR_const_StringR(filepath.opencv_as_extern(), node_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -1384,8 +1384,8 @@ pub mod ml {
 		/// This alternative version of [DTrees::load] function uses the following default values for its arguments:
 		/// * node_name: String()
 		#[inline]
-		pub fn load_def(filepath: &str) -> Result<core::Ptr<crate::ml::DTrees>> {
-			extern_container_arg!(filepath);
+		pub fn load_def(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::DTrees>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_DTrees_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2201,8 +2201,8 @@ pub mod ml {
 		/// ## C++ default parameters
 		/// * node_name: String()
 		#[inline]
-		pub fn load(filepath: &str, node_name: &str) -> Result<core::Ptr<crate::ml::EM>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>, node_name: &str) -> Result<core::Ptr<crate::ml::EM>> {
+			path_arg!(filepath);
 			extern_container_arg!(node_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_EM_load_const_StringR_const_StringR(filepath.opencv_as_extern(), node_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -2226,8 +2226,8 @@ pub mod ml {
 		/// This alternative version of [EM::load] function uses the following default values for its arguments:
 		/// * node_name: String()
 		#[inline]
-		pub fn load_def(filepath: &str) -> Result<core::Ptr<crate::ml::EM>> {
-			extern_container_arg!(filepath);
+		pub fn load_def(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::EM>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_EM_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2783,8 +2783,8 @@ pub mod ml {
 		/// ## Parameters
 		/// * filepath: path to serialized KNearest
 		#[inline]
-		pub fn load(filepath: &str) -> Result<core::Ptr<crate::ml::KNearest>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::KNearest>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_KNearest_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -3075,8 +3075,8 @@ pub mod ml {
 		/// ## C++ default parameters
 		/// * node_name: String()
 		#[inline]
-		pub fn load(filepath: &str, node_name: &str) -> Result<core::Ptr<crate::ml::LogisticRegression>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>, node_name: &str) -> Result<core::Ptr<crate::ml::LogisticRegression>> {
+			path_arg!(filepath);
 			extern_container_arg!(node_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_LogisticRegression_load_const_StringR_const_StringR(filepath.opencv_as_extern(), node_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -3100,8 +3100,8 @@ pub mod ml {
 		/// This alternative version of [LogisticRegression::load] function uses the following default values for its arguments:
 		/// * node_name: String()
 		#[inline]
-		pub fn load_def(filepath: &str) -> Result<core::Ptr<crate::ml::LogisticRegression>> {
-			extern_container_arg!(filepath);
+		pub fn load_def(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::LogisticRegression>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_LogisticRegression_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -3416,8 +3416,8 @@ pub mod ml {
 		/// ## C++ default parameters
 		/// * node_name: String()
 		#[inline]
-		pub fn load(filepath: &str, node_name: &str) -> Result<core::Ptr<crate::ml::NormalBayesClassifier>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>, node_name: &str) -> Result<core::Ptr<crate::ml::NormalBayesClassifier>> {
+			path_arg!(filepath);
 			extern_container_arg!(node_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_NormalBayesClassifier_load_const_StringR_const_StringR(filepath.opencv_as_extern(), node_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -3441,8 +3441,8 @@ pub mod ml {
 		/// This alternative version of [NormalBayesClassifier::load] function uses the following default values for its arguments:
 		/// * node_name: String()
 		#[inline]
-		pub fn load_def(filepath: &str) -> Result<core::Ptr<crate::ml::NormalBayesClassifier>> {
-			extern_container_arg!(filepath);
+		pub fn load_def(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::NormalBayesClassifier>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_NormalBayesClassifier_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -3771,8 +3771,8 @@ pub mod ml {
 		/// ## C++ default parameters
 		/// * node_name: String()
 		#[inline]
-		pub fn load(filepath: &str, node_name: &str) -> Result<core::Ptr<crate::ml::RTrees>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>, node_name: &str) -> Result<core::Ptr<crate::ml::RTrees>> {
+			path_arg!(filepath);
 			extern_container_arg!(node_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_RTrees_load_const_StringR_const_StringR(filepath.opencv_as_extern(), node_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -3796,8 +3796,8 @@ pub mod ml {
 		/// This alternative version of [RTrees::load] function uses the following default values for its arguments:
 		/// * node_name: String()
 		#[inline]
-		pub fn load_def(filepath: &str) -> Result<core::Ptr<crate::ml::RTrees>> {
-			extern_container_arg!(filepath);
+		pub fn load_def(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::RTrees>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_RTrees_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -4085,8 +4085,8 @@ pub mod ml {
 		/// ## Parameters
 		/// * filepath: path to serialized svm
 		#[inline]
-		pub fn load(filepath: &str) -> Result<core::Ptr<crate::ml::SVM>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::SVM>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_SVM_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -4878,8 +4878,8 @@ pub mod ml {
 		/// ## C++ default parameters
 		/// * node_name: String()
 		#[inline]
-		pub fn load(filepath: &str, node_name: &str) -> Result<core::Ptr<crate::ml::SVMSGD>> {
-			extern_container_arg!(filepath);
+		pub fn load(filepath: impl AsRef<OsStr>, node_name: &str) -> Result<core::Ptr<crate::ml::SVMSGD>> {
+			path_arg!(filepath);
 			extern_container_arg!(node_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_SVMSGD_load_const_StringR_const_StringR(filepath.opencv_as_extern(), node_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -4903,8 +4903,8 @@ pub mod ml {
 		/// This alternative version of [SVMSGD::load] function uses the following default values for its arguments:
 		/// * node_name: String()
 		#[inline]
-		pub fn load_def(filepath: &str) -> Result<core::Ptr<crate::ml::SVMSGD>> {
-			extern_container_arg!(filepath);
+		pub fn load_def(filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::ml::SVMSGD>> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_SVMSGD_load_const_StringR(filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -5513,8 +5513,8 @@ pub mod ml {
 		/// * delimiter: ','
 		/// * missch: '?'
 		#[inline]
-		pub fn load_from_csv(filename: &str, header_line_count: i32, response_start_idx: i32, response_end_idx: i32, var_type_spec: &str, delimiter: char, missch: char) -> Result<core::Ptr<crate::ml::TrainData>> {
-			extern_container_arg!(filename);
+		pub fn load_from_csv(filename: impl AsRef<OsStr>, header_line_count: i32, response_start_idx: i32, response_end_idx: i32, var_type_spec: &str, delimiter: char, missch: char) -> Result<core::Ptr<crate::ml::TrainData>> {
+			path_arg!(filename);
 			extern_container_arg!(var_type_spec);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_TrainData_loadFromCSV_const_StringR_int_int_int_const_StringR_char_char(filename.opencv_as_extern(), header_line_count, response_start_idx, response_end_idx, var_type_spec.opencv_as_extern(), u8::try_from(delimiter)? as c_char, u8::try_from(missch)? as c_char, ocvrs_return.as_mut_ptr()) };
@@ -5563,8 +5563,8 @@ pub mod ml {
 		/// * delimiter: ','
 		/// * missch: '?'
 		#[inline]
-		pub fn load_from_csv_def(filename: &str, header_line_count: i32) -> Result<core::Ptr<crate::ml::TrainData>> {
-			extern_container_arg!(filename);
+		pub fn load_from_csv_def(filename: impl AsRef<OsStr>, header_line_count: i32) -> Result<core::Ptr<crate::ml::TrainData>> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ml_TrainData_loadFromCSV_const_StringR_int(filename.opencv_as_extern(), header_line_count, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

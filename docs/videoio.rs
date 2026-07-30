@@ -1392,8 +1392,8 @@ pub mod videoio {
 		/// ## C++ default parameters
 		/// * api_preference: CAP_ANY
 		#[inline]
-		pub fn from_file(filename: &str, api_preference: i32) -> Result<crate::videoio::VideoCapture> {
-			extern_container_arg!(filename);
+		pub fn from_file(filename: impl AsRef<OsStr>, api_preference: i32) -> Result<crate::videoio::VideoCapture> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoCapture_VideoCapture_const_StringR_int(filename.opencv_as_extern(), api_preference, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1425,8 +1425,8 @@ pub mod videoio {
 		/// This alternative version of [from_file] function uses the following default values for its arguments:
 		/// * api_preference: CAP_ANY
 		#[inline]
-		pub fn from_file_def(filename: &str) -> Result<crate::videoio::VideoCapture> {
-			extern_container_arg!(filename);
+		pub fn from_file_def(filename: impl AsRef<OsStr>) -> Result<crate::videoio::VideoCapture> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoCapture_VideoCapture_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1444,8 +1444,8 @@ pub mod videoio {
 		/// The `params` parameter allows to specify extra parameters encoded as pairs `(paramId_1, paramValue_1, paramId_2, paramValue_2, ...)`.
 		/// See cv::VideoCaptureProperties
 		#[inline]
-		pub fn from_file_with_params(filename: &str, api_preference: i32, params: &core::Vector<i32>) -> Result<crate::videoio::VideoCapture> {
-			extern_container_arg!(filename);
+		pub fn from_file_with_params(filename: impl AsRef<OsStr>, api_preference: i32, params: &core::Vector<i32>) -> Result<crate::videoio::VideoCapture> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoCapture_VideoCapture_const_StringR_int_const_vectorLintGR(filename.opencv_as_extern(), api_preference, params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1688,8 +1688,8 @@ pub mod videoio {
 		/// ## C++ default parameters
 		/// * api_preference: CAP_ANY
 		#[inline]
-		fn open_file(&mut self, filename: &str, api_preference: i32) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_file(&mut self, filename: impl AsRef<OsStr>, api_preference: i32) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoCapture_open_const_StringR_int(self.as_raw_mut_VideoCapture(), filename.opencv_as_extern(), api_preference, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1711,8 +1711,8 @@ pub mod videoio {
 		/// This alternative version of [VideoCaptureTrait::open_file] function uses the following default values for its arguments:
 		/// * api_preference: CAP_ANY
 		#[inline]
-		fn open_file_def(&mut self, filename: &str) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_file_def(&mut self, filename: impl AsRef<OsStr>) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoCapture_open_const_StringR(self.as_raw_mut_VideoCapture(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1732,8 +1732,8 @@ pub mod videoio {
 		///
 		/// The method first calls VideoCapture::release to close the already opened file or camera.
 		#[inline]
-		fn open_file_with_params(&mut self, filename: &str, api_preference: i32, params: &core::Vector<i32>) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_file_with_params(&mut self, filename: impl AsRef<OsStr>, api_preference: i32, params: &core::Vector<i32>) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoCapture_open_const_StringR_int_const_vectorLintGR(self.as_raw_mut_VideoCapture(), filename.opencv_as_extern(), api_preference, params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2066,8 +2066,8 @@ pub mod videoio {
 		/// ## C++ default parameters
 		/// * is_color: true
 		#[inline]
-		pub fn new(filename: &str, fourcc: i32, fps: f64, frame_size: core::Size, is_color: bool) -> Result<crate::videoio::VideoWriter> {
-			extern_container_arg!(filename);
+		pub fn new(filename: impl AsRef<OsStr>, fourcc: i32, fps: f64, frame_size: core::Size, is_color: bool) -> Result<crate::videoio::VideoWriter> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_VideoWriter_const_StringR_int_double_Size_bool(filename.opencv_as_extern(), fourcc, fps, &frame_size, is_color, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2115,8 +2115,8 @@ pub mod videoio {
 		/// This alternative version of [new] function uses the following default values for its arguments:
 		/// * is_color: true
 		#[inline]
-		pub fn new_def(filename: &str, fourcc: i32, fps: f64, frame_size: core::Size) -> Result<crate::videoio::VideoWriter> {
-			extern_container_arg!(filename);
+		pub fn new_def(filename: impl AsRef<OsStr>, fourcc: i32, fps: f64, frame_size: core::Size) -> Result<crate::videoio::VideoWriter> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_VideoWriter_const_StringR_int_double_Size(filename.opencv_as_extern(), fourcc, fps, &frame_size, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2140,8 +2140,8 @@ pub mod videoio {
 		/// ## C++ default parameters
 		/// * is_color: true
 		#[inline]
-		pub fn new_with_backend(filename: &str, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size, is_color: bool) -> Result<crate::videoio::VideoWriter> {
-			extern_container_arg!(filename);
+		pub fn new_with_backend(filename: impl AsRef<OsStr>, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size, is_color: bool) -> Result<crate::videoio::VideoWriter> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_VideoWriter_const_StringR_int_int_double_Size_bool(filename.opencv_as_extern(), api_preference, fourcc, fps, &frame_size, is_color, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2166,8 +2166,8 @@ pub mod videoio {
 		/// This alternative version of [new_with_backend] function uses the following default values for its arguments:
 		/// * is_color: true
 		#[inline]
-		pub fn new_with_backend_def(filename: &str, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size) -> Result<crate::videoio::VideoWriter> {
-			extern_container_arg!(filename);
+		pub fn new_with_backend_def(filename: impl AsRef<OsStr>, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size) -> Result<crate::videoio::VideoWriter> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_VideoWriter_const_StringR_int_int_double_Size(filename.opencv_as_extern(), api_preference, fourcc, fps, &frame_size, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2188,8 +2188,8 @@ pub mod videoio {
 		/// The `params` parameter allows to specify extra encoder parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, ... .)
 		/// see cv::VideoWriterProperties
 		#[inline]
-		pub fn new_1(filename: &str, fourcc: i32, fps: f64, frame_size: core::Size, params: &core::Vector<i32>) -> Result<crate::videoio::VideoWriter> {
-			extern_container_arg!(filename);
+		pub fn new_with_params(filename: impl AsRef<OsStr>, fourcc: i32, fps: f64, frame_size: core::Size, params: &core::Vector<i32>) -> Result<crate::videoio::VideoWriter> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_VideoWriter_const_StringR_int_double_const_SizeR_const_vectorLintGR(filename.opencv_as_extern(), fourcc, fps, &frame_size, params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2207,8 +2207,8 @@ pub mod videoio {
 		///
 		/// ## Overloaded parameters
 		#[inline]
-		pub fn new_2(filename: &str, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size, params: &core::Vector<i32>) -> Result<crate::videoio::VideoWriter> {
-			extern_container_arg!(filename);
+		pub fn new_with_backend_params(filename: impl AsRef<OsStr>, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size, params: &core::Vector<i32>) -> Result<crate::videoio::VideoWriter> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_VideoWriter_const_StringR_int_int_double_const_SizeR_const_vectorLintGR(filename.opencv_as_extern(), api_preference, fourcc, fps, &frame_size, params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2299,8 +2299,8 @@ pub mod videoio {
 		/// ## C++ default parameters
 		/// * is_color: true
 		#[inline]
-		fn open(&mut self, filename: &str, fourcc: i32, fps: f64, frame_size: core::Size, is_color: bool) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open(&mut self, filename: impl AsRef<OsStr>, fourcc: i32, fps: f64, frame_size: core::Size, is_color: bool) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_open_const_StringR_int_double_Size_bool(self.as_raw_mut_VideoWriter(), filename.opencv_as_extern(), fourcc, fps, &frame_size, is_color, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2321,8 +2321,8 @@ pub mod videoio {
 		/// This alternative version of [VideoWriterTrait::open] function uses the following default values for its arguments:
 		/// * is_color: true
 		#[inline]
-		fn open_def(&mut self, filename: &str, fourcc: i32, fps: f64, frame_size: core::Size) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_def(&mut self, filename: impl AsRef<OsStr>, fourcc: i32, fps: f64, frame_size: core::Size) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_open_const_StringR_int_double_Size(self.as_raw_mut_VideoWriter(), filename.opencv_as_extern(), fourcc, fps, &frame_size, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2344,8 +2344,8 @@ pub mod videoio {
 		/// ## C++ default parameters
 		/// * is_color: true
 		#[inline]
-		fn open_with_backend(&mut self, filename: &str, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size, is_color: bool) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_with_backend(&mut self, filename: impl AsRef<OsStr>, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size, is_color: bool) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_open_const_StringR_int_int_double_Size_bool(self.as_raw_mut_VideoWriter(), filename.opencv_as_extern(), api_preference, fourcc, fps, &frame_size, is_color, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2369,8 +2369,8 @@ pub mod videoio {
 		/// This alternative version of [VideoWriterTrait::open_with_backend] function uses the following default values for its arguments:
 		/// * is_color: true
 		#[inline]
-		fn open_with_backend_def(&mut self, filename: &str, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_with_backend_def(&mut self, filename: impl AsRef<OsStr>, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_open_const_StringR_int_int_double_Size(self.as_raw_mut_VideoWriter(), filename.opencv_as_extern(), api_preference, fourcc, fps, &frame_size, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2389,8 +2389,8 @@ pub mod videoio {
 		///
 		/// ## Overloaded parameters
 		#[inline]
-		fn open_1(&mut self, filename: &str, fourcc: i32, fps: f64, frame_size: core::Size, params: &core::Vector<i32>) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_with_params(&mut self, filename: impl AsRef<OsStr>, fourcc: i32, fps: f64, frame_size: core::Size, params: &core::Vector<i32>) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_open_const_StringR_int_double_const_SizeR_const_vectorLintGR(self.as_raw_mut_VideoWriter(), filename.opencv_as_extern(), fourcc, fps, &frame_size, params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2409,8 +2409,8 @@ pub mod videoio {
 		///
 		/// ## Overloaded parameters
 		#[inline]
-		fn open_2(&mut self, filename: &str, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size, params: &core::Vector<i32>) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn open_with_backend_params(&mut self, filename: impl AsRef<OsStr>, api_preference: i32, fourcc: i32, fps: f64, frame_size: core::Size, params: &core::Vector<i32>) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_VideoWriter_open_const_StringR_int_int_double_const_SizeR_const_vectorLintGR(self.as_raw_mut_VideoWriter(), filename.opencv_as_extern(), api_preference, fourcc, fps, &frame_size, params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

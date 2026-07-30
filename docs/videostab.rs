@@ -826,8 +826,8 @@ pub mod videostab {
 
 	impl FromFileMotionReader {
 		#[inline]
-		pub fn new(path: &str) -> Result<crate::videostab::FromFileMotionReader> {
-			extern_container_arg!(path);
+		pub fn new(path: impl AsRef<OsStr>) -> Result<crate::videostab::FromFileMotionReader> {
+			path_arg!(path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_videostab_FromFileMotionReader_FromFileMotionReader_const_StringR(path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -5022,8 +5022,8 @@ pub mod videostab {
 
 	impl ToFileMotionWriter {
 		#[inline]
-		pub fn new(path: &str, mut estimator: core::Ptr<crate::videostab::ImageMotionEstimatorBase>) -> Result<crate::videostab::ToFileMotionWriter> {
-			extern_container_arg!(path);
+		pub fn new(path: impl AsRef<OsStr>, mut estimator: core::Ptr<crate::videostab::ImageMotionEstimatorBase>) -> Result<crate::videostab::ToFileMotionWriter> {
+			path_arg!(path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_videostab_ToFileMotionWriter_ToFileMotionWriter_const_StringR_PtrLImageMotionEstimatorBaseG(path.opencv_as_extern(), estimator.as_raw_mut_PtrOfImageMotionEstimatorBase(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -5424,8 +5424,8 @@ pub mod videostab {
 		/// ## C++ default parameters
 		/// * volatile_frame: false
 		#[inline]
-		pub fn new(path: &str, volatile_frame: bool) -> Result<crate::videostab::VideoFileSource> {
-			extern_container_arg!(path);
+		pub fn new(path: impl AsRef<OsStr>, volatile_frame: bool) -> Result<crate::videostab::VideoFileSource> {
+			path_arg!(path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_videostab_VideoFileSource_VideoFileSource_const_StringR_bool(path.opencv_as_extern(), volatile_frame, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -5438,8 +5438,8 @@ pub mod videostab {
 		/// This alternative version of [new] function uses the following default values for its arguments:
 		/// * volatile_frame: false
 		#[inline]
-		pub fn new_def(path: &str) -> Result<crate::videostab::VideoFileSource> {
-			extern_container_arg!(path);
+		pub fn new_def(path: impl AsRef<OsStr>) -> Result<crate::videostab::VideoFileSource> {
+			path_arg!(path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_videostab_VideoFileSource_VideoFileSource_const_StringR(path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

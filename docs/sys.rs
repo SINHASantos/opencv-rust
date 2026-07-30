@@ -2040,15 +2040,8 @@ mod core_sys {
 		pub fn cv__OutputArray_create_const_const_MatShapeR_int_int_bool_DepthMask(instance: *const c_void, shape: *const core::MatShape, typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask, ocvrs_return: *mut Result<()>);
 		pub fn cv__OutputArray_create_const_const_MatShapeR_int(instance: *const c_void, shape: *const core::MatShape, typ: i32, ocvrs_return: *mut Result<()>);
 		pub fn cv__OutputArray_createSameSize_const_const__InputArrayR_int(instance: *const c_void, arr: *const c_void, mtype: i32, ocvrs_return: *mut Result<()>);
-		pub fn cv__OutputArray_fit_const_Size_int_int_bool_DepthMask(instance: *const c_void, sz: *const core::Size, typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask, ocvrs_return: *mut Result<()>);
-		pub fn cv__OutputArray_fit_const_Size_int(instance: *const c_void, sz: *const core::Size, typ: i32, ocvrs_return: *mut Result<()>);
-		pub fn cv__OutputArray_fit_const_int_int_int_int_bool_DepthMask(instance: *const c_void, rows: i32, cols: i32, typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask, ocvrs_return: *mut Result<()>);
-		pub fn cv__OutputArray_fit_const_int_int_int(instance: *const c_void, rows: i32, cols: i32, typ: i32, ocvrs_return: *mut Result<()>);
 		pub fn cv__OutputArray_fit_const_int_const_intX_int_int_bool_DepthMask(instance: *const c_void, dims: i32, size: *const i32, typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask, ocvrs_return: *mut Result<()>);
 		pub fn cv__OutputArray_fit_const_int_const_intX_int(instance: *const c_void, dims: i32, size: *const i32, typ: i32, ocvrs_return: *mut Result<()>);
-		pub fn cv__OutputArray_fit_const_const_MatShapeR_int_int_bool_DepthMask(instance: *const c_void, shape: *const core::MatShape, typ: i32, i: i32, allow_transposed: bool, fixed_depth_mask: core::_OutputArray_DepthMask, ocvrs_return: *mut Result<()>);
-		pub fn cv__OutputArray_fit_const_const_MatShapeR_int(instance: *const c_void, shape: *const core::MatShape, typ: i32, ocvrs_return: *mut Result<()>);
-		pub fn cv__OutputArray_fitSameSize_const_const__InputArrayR_int(instance: *const c_void, arr: *const c_void, mtype: i32, ocvrs_return: *mut Result<()>);
 		pub fn cv__OutputArray_release_const(instance: *const c_void, ocvrs_return: *mut Result<()>);
 		pub fn cv__OutputArray_clear_const(instance: *const c_void, ocvrs_return: *mut Result<()>);
 		pub fn cv__OutputArray_setTo_const_const__InputArrayR_const__InputArrayR(instance: *const c_void, value: *const c_void, mask: *const c_void, ocvrs_return: *mut Result<()>);

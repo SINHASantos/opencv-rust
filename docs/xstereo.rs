@@ -239,8 +239,8 @@ pub mod xstereo {
 		/// ## C++ default parameters
 		/// * param_filepath: cv::String()
 		#[inline]
-		pub fn create(mono_img_size: core::Size, param_filepath: &str) -> Result<core::Ptr<crate::xstereo::QuasiDenseStereo>> {
-			extern_container_arg!(param_filepath);
+		pub fn create(mono_img_size: core::Size, param_filepath: impl AsRef<OsStr>) -> Result<core::Ptr<crate::xstereo::QuasiDenseStereo>> {
+			path_arg!(param_filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_stereo_QuasiDenseStereo_create_Size_String(&mono_img_size, param_filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -305,8 +305,8 @@ pub mod xstereo {
 		/// ## See also
 		/// loadParameters
 		#[inline]
-		fn load_parameters(&mut self, filepath: &str) -> Result<i32> {
-			extern_container_arg!(filepath);
+		fn load_parameters(&mut self, filepath: impl AsRef<OsStr>) -> Result<i32> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_stereo_QuasiDenseStereo_loadParameters_String(self.as_raw_mut_QuasiDenseStereo(), filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -325,8 +325,8 @@ pub mod xstereo {
 		/// ## See also
 		/// loadParameters
 		#[inline]
-		fn save_parameters(&mut self, filepath: &str) -> Result<i32> {
-			extern_container_arg!(filepath);
+		fn save_parameters(&mut self, filepath: impl AsRef<OsStr>) -> Result<i32> {
+			path_arg!(filepath);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_stereo_QuasiDenseStereo_saveParameters_String(self.as_raw_mut_QuasiDenseStereo(), filepath.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

@@ -406,8 +406,8 @@ pub mod xobjdetect {
 		fn as_raw_mut_BaseCascadeClassifier(&mut self) -> *mut c_void;
 
 		#[inline]
-		fn load(&mut self, filename: &str) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn load(&mut self, filename: impl AsRef<OsStr>) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_BaseCascadeClassifier_load_const_StringR(self.as_raw_mut_BaseCascadeClassifier(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -605,8 +605,8 @@ pub mod xobjdetect {
 		/// ## Parameters
 		/// * filename: Name of the file from which the classifier is loaded.
 		#[inline]
-		pub fn new(filename: &str) -> Result<crate::xobjdetect::CascadeClassifier> {
-			extern_container_arg!(filename);
+		pub fn new(filename: impl AsRef<OsStr>) -> Result<crate::xobjdetect::CascadeClassifier> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_CascadeClassifier_CascadeClassifier_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -695,8 +695,8 @@ pub mod xobjdetect {
 		/// HAAR classifier trained by the haartraining application or a new cascade classifier trained by the
 		/// traincascade application.
 		#[inline]
-		fn load(&mut self, filename: &str) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn load(&mut self, filename: impl AsRef<OsStr>) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_CascadeClassifier_load_const_StringR(self.as_raw_mut_CascadeClassifier(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1737,8 +1737,8 @@ pub mod xobjdetect {
 		/// Creates the HOG descriptor and detector and loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file.
 		/// * filename: The file name containing HOGDescriptor properties and coefficients for the linear SVM classifier.
 		#[inline]
-		pub fn new_from_file(filename: &str) -> Result<crate::xobjdetect::HOGDescriptor> {
-			extern_container_arg!(filename);
+		pub fn new_from_file(filename: impl AsRef<OsStr>) -> Result<crate::xobjdetect::HOGDescriptor> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_HOGDescriptor_HOGDescriptor_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1975,8 +1975,8 @@ pub mod xobjdetect {
 		/// ## C++ default parameters
 		/// * objname: String()
 		#[inline]
-		fn save(&self, filename: &str, objname: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn save(&self, filename: impl AsRef<OsStr>, objname: &str) -> Result<()> {
+			path_arg!(filename);
 			extern_container_arg!(objname);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_HOGDescriptor_save_const_const_StringR_const_StringR(self.as_raw_HOGDescriptor(), filename.opencv_as_extern(), objname.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -1994,8 +1994,8 @@ pub mod xobjdetect {
 		/// This alternative version of [HOGDescriptorTraitConst::save] function uses the following default values for its arguments:
 		/// * objname: String()
 		#[inline]
-		fn save_def(&self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn save_def(&self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_HOGDescriptor_save_const_const_StringR(self.as_raw_HOGDescriptor(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2606,8 +2606,8 @@ pub mod xobjdetect {
 		/// ## C++ default parameters
 		/// * objname: String()
 		#[inline]
-		fn load(&mut self, filename: &str, objname: &str) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn load(&mut self, filename: impl AsRef<OsStr>, objname: &str) -> Result<bool> {
+			path_arg!(filename);
 			extern_container_arg!(objname);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_HOGDescriptor_load_const_StringR_const_StringR(self.as_raw_mut_HOGDescriptor(), filename.opencv_as_extern(), objname.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -2625,8 +2625,8 @@ pub mod xobjdetect {
 		/// This alternative version of [HOGDescriptorTrait::load] function uses the following default values for its arguments:
 		/// * objname: String()
 		#[inline]
-		fn load_def(&mut self, filename: &str) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn load_def(&mut self, filename: impl AsRef<OsStr>) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_HOGDescriptor_load_const_StringR(self.as_raw_mut_HOGDescriptor(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

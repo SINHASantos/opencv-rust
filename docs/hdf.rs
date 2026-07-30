@@ -72,8 +72,8 @@ pub mod hdf {
 	/// ```
 	///
 	#[inline]
-	pub fn open(hdf5_filename: &str) -> Result<core::Ptr<crate::hdf::HDF5>> {
-		extern_container_arg!(hdf5_filename);
+	pub fn open(hdf5_filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::hdf::HDF5>> {
+		path_arg!(hdf5_filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_hdf_open_const_StringR(hdf5_filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);

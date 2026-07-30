@@ -368,8 +368,8 @@ pub mod ptcloud {
 	/// * colors: noArray()
 	/// * tex_coords: noArray()
 	#[inline]
-	pub fn load_mesh_def(filename: &str, vertices: &mut impl ToOutputArray, indices: &mut impl ToOutputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn load_mesh_def(filename: impl AsRef<OsStr>, vertices: &mut impl ToOutputArray, indices: &mut impl ToOutputArray) -> Result<()> {
+		path_arg!(filename);
 		output_array_arg!(vertices);
 		output_array_arg!(indices);
 		return_send!(via ocvrs_return);
@@ -404,8 +404,8 @@ pub mod ptcloud {
 	/// * colors: noArray()
 	/// * tex_coords: noArray()
 	#[inline]
-	pub fn load_mesh(filename: &str, vertices: &mut impl ToOutputArray, indices: &mut impl ToOutputArray, normals: &mut impl ToOutputArray, colors: &mut impl ToOutputArray, tex_coords: &mut impl ToOutputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn load_mesh(filename: impl AsRef<OsStr>, vertices: &mut impl ToOutputArray, indices: &mut impl ToOutputArray, normals: &mut impl ToOutputArray, colors: &mut impl ToOutputArray, tex_coords: &mut impl ToOutputArray) -> Result<()> {
+		path_arg!(filename);
 		output_array_arg!(vertices);
 		output_array_arg!(indices);
 		output_array_arg!(normals);
@@ -441,8 +441,8 @@ pub mod ptcloud {
 	/// * normals: noArray()
 	/// * rgb: noArray()
 	#[inline]
-	pub fn load_point_cloud_def(filename: &str, vertices: &mut impl ToOutputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn load_point_cloud_def(filename: impl AsRef<OsStr>, vertices: &mut impl ToOutputArray) -> Result<()> {
+		path_arg!(filename);
 		output_array_arg!(vertices);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_loadPointCloud_const_StringR_const__OutputArrayR(filename.opencv_as_extern(), vertices.as_raw__OutputArray(), ocvrs_return.as_mut_ptr()) };
@@ -473,8 +473,8 @@ pub mod ptcloud {
 	/// * normals: noArray()
 	/// * rgb: noArray()
 	#[inline]
-	pub fn load_point_cloud(filename: &str, vertices: &mut impl ToOutputArray, normals: &mut impl ToOutputArray, rgb: &mut impl ToOutputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn load_point_cloud(filename: impl AsRef<OsStr>, vertices: &mut impl ToOutputArray, normals: &mut impl ToOutputArray, rgb: &mut impl ToOutputArray) -> Result<()> {
+		path_arg!(filename);
 		output_array_arg!(vertices);
 		output_array_arg!(normals);
 		output_array_arg!(rgb);
@@ -624,8 +624,8 @@ pub mod ptcloud {
 	/// * colors: noArray()
 	/// * tex_coords: noArray()
 	#[inline]
-	pub fn save_mesh_def(filename: &str, vertices: &impl ToInputArray, indices: &impl ToInputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn save_mesh_def(filename: impl AsRef<OsStr>, vertices: &impl ToInputArray, indices: &impl ToInputArray) -> Result<()> {
+		path_arg!(filename);
 		input_array_arg!(vertices);
 		input_array_arg!(indices);
 		return_send!(via ocvrs_return);
@@ -653,8 +653,8 @@ pub mod ptcloud {
 	/// * colors: noArray()
 	/// * tex_coords: noArray()
 	#[inline]
-	pub fn save_mesh(filename: &str, vertices: &impl ToInputArray, indices: &impl ToInputArray, normals: &impl ToInputArray, colors: &impl ToInputArray, tex_coords: &impl ToInputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn save_mesh(filename: impl AsRef<OsStr>, vertices: &impl ToInputArray, indices: &impl ToInputArray, normals: &impl ToInputArray, colors: &impl ToInputArray, tex_coords: &impl ToInputArray) -> Result<()> {
+		path_arg!(filename);
 		input_array_arg!(vertices);
 		input_array_arg!(indices);
 		input_array_arg!(normals);
@@ -683,8 +683,8 @@ pub mod ptcloud {
 	/// * normals: noArray()
 	/// * rgb: noArray()
 	#[inline]
-	pub fn save_point_cloud_def(filename: &str, vertices: &impl ToInputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn save_point_cloud_def(filename: impl AsRef<OsStr>, vertices: &impl ToInputArray) -> Result<()> {
+		path_arg!(filename);
 		input_array_arg!(vertices);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_savePointCloud_const_StringR_const__InputArrayR(filename.opencv_as_extern(), vertices.as_raw__InputArray(), ocvrs_return.as_mut_ptr()) };
@@ -708,8 +708,8 @@ pub mod ptcloud {
 	/// * normals: noArray()
 	/// * rgb: noArray()
 	#[inline]
-	pub fn save_point_cloud(filename: &str, vertices: &impl ToInputArray, normals: &impl ToInputArray, rgb: &impl ToInputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn save_point_cloud(filename: impl AsRef<OsStr>, vertices: &impl ToInputArray, normals: &impl ToInputArray, rgb: &impl ToInputArray) -> Result<()> {
+		path_arg!(filename);
 		input_array_arg!(vertices);
 		input_array_arg!(normals);
 		input_array_arg!(rgb);

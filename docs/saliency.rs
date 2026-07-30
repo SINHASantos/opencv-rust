@@ -473,8 +473,8 @@ pub mod saliency {
 		/// ## Parameters
 		/// * trainingPath: trained model path
 		#[inline]
-		fn set_training_path(&mut self, training_path: &str) -> Result<()> {
-			extern_container_arg!(training_path);
+		fn set_training_path(&mut self, training_path: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(training_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_saliency_ObjectnessBING_setTrainingPath_const_StringR(self.as_raw_mut_ObjectnessBING(), training_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

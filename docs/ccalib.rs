@@ -1102,8 +1102,8 @@ pub mod ccalib {
 		/// * descriptor: xfeatures2d::AKAZE::create(xfeatures2d::AKAZE::DESCRIPTOR_MLDB,0,3,0.006f)
 		/// * matcher: DescriptorMatcher::create("BruteForce-L1")
 		#[inline]
-		pub fn new(camera_type: i32, n_cameras: i32, file_name: &str, pattern_width: f32, pattern_height: f32, verbose: i32, show_extration: i32, n_mini_matches: i32, flags: i32, criteria: core::TermCriteria, mut detector: core::Ptr<crate::features::Feature2D>, mut descriptor: core::Ptr<crate::features::Feature2D>, mut matcher: core::Ptr<crate::features::DescriptorMatcher>) -> Result<crate::ccalib::MultiCameraCalibration> {
-			extern_container_arg!(file_name);
+		pub fn new(camera_type: i32, n_cameras: i32, file_name: impl AsRef<OsStr>, pattern_width: f32, pattern_height: f32, verbose: i32, show_extration: i32, n_mini_matches: i32, flags: i32, criteria: core::TermCriteria, mut detector: core::Ptr<crate::features::Feature2D>, mut descriptor: core::Ptr<crate::features::Feature2D>, mut matcher: core::Ptr<crate::features::DescriptorMatcher>) -> Result<crate::ccalib::MultiCameraCalibration> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_multicalib_MultiCameraCalibration_MultiCameraCalibration_int_int_const_stringR_float_float_int_int_int_int_TermCriteria_PtrLFeature2DG_PtrLFeature2DG_PtrLDescriptorMatcherG(camera_type, n_cameras, file_name.opencv_as_extern(), pattern_width, pattern_height, verbose, show_extration, n_mini_matches, flags, &criteria, detector.as_raw_mut_PtrOfFeature2D(), descriptor.as_raw_mut_PtrOfFeature2D(), matcher.as_raw_mut_PtrOfDescriptorMatcher(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1123,8 +1123,8 @@ pub mod ccalib {
 		/// * descriptor: xfeatures2d::AKAZE::create(xfeatures2d::AKAZE::DESCRIPTOR_MLDB,0,3,0.006f)
 		/// * matcher: DescriptorMatcher::create("BruteForce-L1")
 		#[inline]
-		pub fn new_def(camera_type: i32, n_cameras: i32, file_name: &str, pattern_width: f32, pattern_height: f32) -> Result<crate::ccalib::MultiCameraCalibration> {
-			extern_container_arg!(file_name);
+		pub fn new_def(camera_type: i32, n_cameras: i32, file_name: impl AsRef<OsStr>, pattern_width: f32, pattern_height: f32) -> Result<crate::ccalib::MultiCameraCalibration> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_multicalib_MultiCameraCalibration_MultiCameraCalibration_int_int_const_stringR_float_float(camera_type, n_cameras, file_name.opencv_as_extern(), pattern_width, pattern_height, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1182,8 +1182,8 @@ pub mod ccalib {
 		}
 
 		#[inline]
-		fn write_parameters(&mut self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn write_parameters(&mut self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_multicalib_MultiCameraCalibration_writeParameters_const_stringR(self.as_raw_mut_MultiCameraCalibration(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

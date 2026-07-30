@@ -37,8 +37,8 @@ pub mod cudaobjdetect {
 		/// (trained by the haar training application) and NVIDIA's nvbin are supported for HAAR and only new
 		/// type of OpenCV XML cascade supported for LBP. The working haar models can be found at opencv_folder/data/haarcascades_cuda/
 		#[inline]
-		pub fn create(filename: &str) -> Result<core::Ptr<crate::cudaobjdetect::CUDA_CascadeClassifier>> {
-			extern_container_arg!(filename);
+		pub fn create(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::cudaobjdetect::CUDA_CascadeClassifier>> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_cuda_CascadeClassifier_create_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

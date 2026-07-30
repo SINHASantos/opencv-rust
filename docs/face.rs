@@ -212,8 +212,8 @@ pub mod face {
 	/// This alternative version of [load_face_points] function uses the following default values for its arguments:
 	/// * offset: 0.0f
 	#[inline]
-	pub fn load_face_points_def(filename: &str, points: &mut impl ToOutputArray) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn load_face_points_def(filename: impl AsRef<OsStr>, points: &mut impl ToOutputArray) -> Result<bool> {
+		path_arg!(filename);
 		output_array_arg!(points);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_face_loadFacePoints_String_const__OutputArrayR(filename.opencv_as_extern(), points.as_raw__OutputArray(), ocvrs_return.as_mut_ptr()) };
@@ -253,8 +253,8 @@ pub mod face {
 	/// ## C++ default parameters
 	/// * offset: 0.0f
 	#[inline]
-	pub fn load_face_points(filename: &str, points: &mut impl ToOutputArray, offset: f32) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn load_face_points(filename: impl AsRef<OsStr>, points: &mut impl ToOutputArray, offset: f32) -> Result<bool> {
+		path_arg!(filename);
 		output_array_arg!(points);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_face_loadFacePoints_String_const__OutputArrayR_float(filename.opencv_as_extern(), points.as_raw__OutputArray(), offset, ocvrs_return.as_mut_ptr()) };
@@ -405,8 +405,8 @@ pub mod face {
 	/// * delim: ' '
 	/// * offset: 0.0f
 	#[inline]
-	pub fn load_training_data_def(filename: &str, images: &mut core::Vector<String>, face_points: &mut impl ToOutputArray) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn load_training_data_def(filename: impl AsRef<OsStr>, images: &mut core::Vector<String>, face_points: &mut impl ToOutputArray) -> Result<bool> {
+		path_arg!(filename);
 		output_array_arg!(face_points);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_face_loadTrainingData_String_vectorLStringGR_const__OutputArrayR(filename.opencv_as_extern(), images.as_raw_mut_VectorOfString(), face_points.as_raw__OutputArray(), ocvrs_return.as_mut_ptr()) };
@@ -447,8 +447,8 @@ pub mod face {
 	/// * delim: ' '
 	/// * offset: 0.0f
 	#[inline]
-	pub fn load_training_data(filename: &str, images: &mut core::Vector<String>, face_points: &mut impl ToOutputArray, delim: char, offset: f32) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn load_training_data(filename: impl AsRef<OsStr>, images: &mut core::Vector<String>, face_points: &mut impl ToOutputArray, delim: char, offset: f32) -> Result<bool> {
+		path_arg!(filename);
 		output_array_arg!(face_points);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_face_loadTrainingData_String_vectorLStringGR_const__OutputArrayR_char_float(filename.opencv_as_extern(), images.as_raw_mut_VectorOfString(), face_points.as_raw__OutputArray(), u8::try_from(delim)? as c_char, offset, ocvrs_return.as_mut_ptr()) };
@@ -1407,8 +1407,8 @@ pub mod face {
 		/// The suffix const means that prediction does not affect the internal model state, so the method can
 		/// be safely called from within different threads.
 		#[inline]
-		fn write(&self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn write(&self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_face_FaceRecognizer_write_const_const_StringR(self.as_raw_FaceRecognizer(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1628,8 +1628,8 @@ pub mod face {
 		/// FaceRecognizer::load(FileStorage& fs) in turn gets called by
 		/// FaceRecognizer::load(const String& filename), to ease saving a model.
 		#[inline]
-		fn read(&mut self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn read(&mut self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_face_FaceRecognizer_read_const_StringR(self.as_raw_mut_FaceRecognizer(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2820,9 +2820,9 @@ pub mod face {
 		/// ## C++ default parameters
 		/// * model_filename: "face_landmarks.dat"
 		#[inline]
-		fn training(&mut self, images: &mut core::Vector<core::Mat>, landmarks: &mut core::Vector<core::Vector<core::Point2f>>, configfile: &str, scale: core::Size, model_filename: &str) -> Result<bool> {
-			extern_container_arg!(configfile);
-			extern_container_arg!(model_filename);
+		fn training(&mut self, images: &mut core::Vector<core::Mat>, landmarks: &mut core::Vector<core::Vector<core::Point2f>>, configfile: impl AsRef<OsStr>, scale: core::Size, model_filename: impl AsRef<OsStr>) -> Result<bool> {
+			path_arg!(configfile);
+			path_arg!(model_filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_face_FacemarkKazemi_training_vectorLMatGR_vectorLvectorLPoint2fGGR_string_Size_string(self.as_raw_mut_FacemarkKazemi(), images.as_raw_mut_VectorOfMat(), landmarks.as_raw_mut_VectorOfVectorOfPoint2f(), configfile.opencv_as_extern(), &scale, model_filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2845,8 +2845,8 @@ pub mod face {
 		/// This alternative version of [FacemarkKazemiTrait::training] function uses the following default values for its arguments:
 		/// * model_filename: "face_landmarks.dat"
 		#[inline]
-		fn training_def(&mut self, images: &mut core::Vector<core::Mat>, landmarks: &mut core::Vector<core::Vector<core::Point2f>>, configfile: &str, scale: core::Size) -> Result<bool> {
-			extern_container_arg!(configfile);
+		fn training_def(&mut self, images: &mut core::Vector<core::Mat>, landmarks: &mut core::Vector<core::Vector<core::Point2f>>, configfile: impl AsRef<OsStr>, scale: core::Size) -> Result<bool> {
+			path_arg!(configfile);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_face_FacemarkKazemi_training_vectorLMatGR_vectorLvectorLPoint2fGGR_string_Size(self.as_raw_mut_FacemarkKazemi(), images.as_raw_mut_VectorOfMat(), landmarks.as_raw_mut_VectorOfVectorOfPoint2f(), configfile.opencv_as_extern(), &scale, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -4394,8 +4394,8 @@ pub mod face {
 		/// ## C++ default parameters
 		/// * objname: String()
 		#[inline]
-		pub fn load(filename: &str, objname: &str) -> Result<core::Ptr<crate::face::MACE>> {
-			extern_container_arg!(filename);
+		pub fn load(filename: impl AsRef<OsStr>, objname: &str) -> Result<core::Ptr<crate::face::MACE>> {
+			path_arg!(filename);
 			extern_container_arg!(objname);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_face_MACE_load_const_StringR_const_StringR(filename.opencv_as_extern(), objname.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -4414,8 +4414,8 @@ pub mod face {
 		/// This alternative version of [MACE::load] function uses the following default values for its arguments:
 		/// * objname: String()
 		#[inline]
-		pub fn load_def(filename: &str) -> Result<core::Ptr<crate::face::MACE>> {
-			extern_container_arg!(filename);
+		pub fn load_def(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::face::MACE>> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_face_MACE_load_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

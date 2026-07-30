@@ -34,9 +34,9 @@ pub mod quality {
 		/// * model_file_path: cv::String which contains a path to the BRISQUE model data, eg. /path/to/brisque_model_live.yml
 		/// * range_file_path: cv::String which contains a path to the BRISQUE range data, eg. /path/to/brisque_range_live.yml
 		#[inline]
-		pub fn create(model_file_path: &str, range_file_path: &str) -> Result<core::Ptr<crate::quality::QualityBRISQUE>> {
-			extern_container_arg!(model_file_path);
-			extern_container_arg!(range_file_path);
+		pub fn create(model_file_path: impl AsRef<OsStr>, range_file_path: impl AsRef<OsStr>) -> Result<core::Ptr<crate::quality::QualityBRISQUE>> {
+			path_arg!(model_file_path);
+			path_arg!(range_file_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_quality_QualityBRISQUE_create_const_StringR_const_StringR(model_file_path.opencv_as_extern(), range_file_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -67,10 +67,10 @@ pub mod quality {
 		/// ## Returns
 		/// cv::Scalar with the score in the first element.  The score ranges from 0 (best quality) to 100 (worst quality)
 		#[inline]
-		pub fn compute(img: &impl ToInputArray, model_file_path: &str, range_file_path: &str) -> Result<core::Scalar> {
+		pub fn compute(img: &impl ToInputArray, model_file_path: impl AsRef<OsStr>, range_file_path: impl AsRef<OsStr>) -> Result<core::Scalar> {
 			input_array_arg!(img);
-			extern_container_arg!(model_file_path);
-			extern_container_arg!(range_file_path);
+			path_arg!(model_file_path);
+			path_arg!(range_file_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_quality_QualityBRISQUE_compute_const__InputArrayR_const_StringR_const_StringR(img.as_raw__InputArray(), model_file_path.opencv_as_extern(), range_file_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

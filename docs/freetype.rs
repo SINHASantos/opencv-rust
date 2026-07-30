@@ -63,8 +63,8 @@ pub mod freetype {
 		/// * fontFileName: FontFile Name
 		/// * idx: face_index to select a font faces in a single file.
 		#[inline]
-		fn load_font_data(&mut self, font_file_name: &str, idx: i32) -> Result<()> {
-			extern_container_arg!(font_file_name);
+		fn load_font_data(&mut self, font_file_name: impl AsRef<OsStr>, idx: i32) -> Result<()> {
+			path_arg!(font_file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_freetype_FreeType2_loadFontData_String_int(self.as_raw_mut_FreeType2(), font_file_name.opencv_as_extern(), idx, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

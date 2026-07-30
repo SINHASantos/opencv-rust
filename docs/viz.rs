@@ -293,8 +293,8 @@ pub mod viz {
 	/// * colors: noArray()
 	/// * normals: noArray()
 	#[inline]
-	pub fn read_cloud_def(file: &str) -> Result<core::Mat> {
-		extern_container_arg!(file);
+	pub fn read_cloud_def(file: impl AsRef<OsStr>) -> Result<core::Mat> {
+		path_arg!(file);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_viz_readCloud_const_StringR(file.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -315,8 +315,8 @@ pub mod viz {
 	/// * colors: noArray()
 	/// * normals: noArray()
 	#[inline]
-	pub fn read_cloud(file: &str, colors: &mut impl ToOutputArray, normals: &mut impl ToOutputArray) -> Result<core::Mat> {
-		extern_container_arg!(file);
+	pub fn read_cloud(file: impl AsRef<OsStr>, colors: &mut impl ToOutputArray, normals: &mut impl ToOutputArray) -> Result<core::Mat> {
+		path_arg!(file);
 		output_array_arg!(colors);
 		output_array_arg!(normals);
 		return_send!(via ocvrs_return);
@@ -330,8 +330,8 @@ pub mod viz {
 	/// ////////////////////////////////////////////////////////////////////////////////////////////
 	/// Reads mesh. Only ply format is supported now and no texture load support
 	#[inline]
-	pub fn read_mesh(file: &str) -> Result<crate::viz::Mesh> {
-		extern_container_arg!(file);
+	pub fn read_mesh(file: impl AsRef<OsStr>) -> Result<crate::viz::Mesh> {
+		path_arg!(file);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_viz_readMesh_const_StringR(file.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -349,8 +349,8 @@ pub mod viz {
 	/// This alternative version of [read_pose] function uses the following default values for its arguments:
 	/// * tag: "pose"
 	#[inline]
-	pub fn read_pose_def(file: &str, pose: &mut core::Affine3d) -> Result<bool> {
-		extern_container_arg!(file);
+	pub fn read_pose_def(file: impl AsRef<OsStr>, pose: &mut core::Affine3d) -> Result<bool> {
+		path_arg!(file);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_viz_readPose_const_StringR_Affine3dR(file.opencv_as_extern(), pose, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -366,8 +366,8 @@ pub mod viz {
 	/// ## C++ default parameters
 	/// * tag: "pose"
 	#[inline]
-	pub fn read_pose(file: &str, pose: &mut core::Affine3d, tag: &str) -> Result<bool> {
-		extern_container_arg!(file);
+	pub fn read_pose(file: impl AsRef<OsStr>, pose: &mut core::Affine3d, tag: &str) -> Result<bool> {
+		path_arg!(file);
 		extern_container_arg!(tag);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_viz_readPose_const_StringR_Affine3dR_const_StringR(file.opencv_as_extern(), pose, tag.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -457,8 +457,8 @@ pub mod viz {
 	/// * normals: noArray()
 	/// * binary: false
 	#[inline]
-	pub fn write_cloud_def(file: &str, cloud: &impl ToInputArray) -> Result<()> {
-		extern_container_arg!(file);
+	pub fn write_cloud_def(file: impl AsRef<OsStr>, cloud: &impl ToInputArray) -> Result<()> {
+		path_arg!(file);
 		input_array_arg!(cloud);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_viz_writeCloud_const_StringR_const__InputArrayR(file.opencv_as_extern(), cloud.as_raw__InputArray(), ocvrs_return.as_mut_ptr()) };
@@ -480,8 +480,8 @@ pub mod viz {
 	/// * normals: noArray()
 	/// * binary: false
 	#[inline]
-	pub fn write_cloud(file: &str, cloud: &impl ToInputArray, colors: &impl ToInputArray, normals: &impl ToInputArray, binary: bool) -> Result<()> {
-		extern_container_arg!(file);
+	pub fn write_cloud(file: impl AsRef<OsStr>, cloud: &impl ToInputArray, colors: &impl ToInputArray, normals: &impl ToInputArray, binary: bool) -> Result<()> {
+		path_arg!(file);
 		input_array_arg!(cloud);
 		input_array_arg!(colors);
 		input_array_arg!(normals);
@@ -501,8 +501,8 @@ pub mod viz {
 	/// This alternative version of [write_pose] function uses the following default values for its arguments:
 	/// * tag: "pose"
 	#[inline]
-	pub fn write_pose_def(file: &str, pose: core::Affine3d) -> Result<()> {
-		extern_container_arg!(file);
+	pub fn write_pose_def(file: impl AsRef<OsStr>, pose: core::Affine3d) -> Result<()> {
+		path_arg!(file);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_viz_writePose_const_StringR_const_Affine3dR(file.opencv_as_extern(), &pose, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -518,8 +518,8 @@ pub mod viz {
 	/// ## C++ default parameters
 	/// * tag: "pose"
 	#[inline]
-	pub fn write_pose(file: &str, pose: core::Affine3d, tag: &str) -> Result<()> {
-		extern_container_arg!(file);
+	pub fn write_pose(file: impl AsRef<OsStr>, pose: core::Affine3d, tag: &str) -> Result<()> {
+		path_arg!(file);
 		extern_container_arg!(tag);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_viz_writePose_const_StringR_const_Affine3dR_const_StringR(file.opencv_as_extern(), &pose, tag.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
@@ -1449,8 +1449,8 @@ pub mod viz {
 		/// ## C++ default parameters
 		/// * typ: LOAD_PLY
 		#[inline]
-		pub fn load(file: &str, typ: i32) -> Result<crate::viz::Mesh> {
-			extern_container_arg!(file);
+		pub fn load(file: impl AsRef<OsStr>, typ: i32) -> Result<crate::viz::Mesh> {
+			path_arg!(file);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_viz_Mesh_load_const_StringR_int(file.opencv_as_extern(), typ, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1473,8 +1473,8 @@ pub mod viz {
 		/// This alternative version of [Mesh::load] function uses the following default values for its arguments:
 		/// * typ: LOAD_PLY
 		#[inline]
-		pub fn load_def(file: &str) -> Result<crate::viz::Mesh> {
-			extern_container_arg!(file);
+		pub fn load_def(file: impl AsRef<OsStr>) -> Result<crate::viz::Mesh> {
+			path_arg!(file);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_viz_Mesh_load_const_StringR(file.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2145,8 +2145,8 @@ pub mod viz {
 		/// ## Parameters
 		/// * file: Name of the file.
 		#[inline]
-		fn save_screenshot(&mut self, file: &str) -> Result<()> {
-			extern_container_arg!(file);
+		fn save_screenshot(&mut self, file: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(file);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_viz_Viz3d_saveScreenshot_const_StringR(self.as_raw_mut_Viz3d(), file.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -6153,8 +6153,8 @@ pub mod viz {
 		/// ## Parameters
 		/// * file_name: Ply file name.
 		#[inline]
-		pub fn from_ply_file(file_name: &str) -> Result<crate::viz::Widget> {
-			extern_container_arg!(file_name);
+		pub fn from_ply_file(file_name: impl AsRef<OsStr>) -> Result<crate::viz::Widget> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_viz_Widget_fromPlyFile_const_StringR(file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

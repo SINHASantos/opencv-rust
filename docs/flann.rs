@@ -601,8 +601,8 @@ pub mod flann {
 		fn as_raw_Index(&self) -> *const c_void;
 
 		#[inline]
-		fn save(&self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn save(&self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_flann_Index_save_const_const_StringR(self.as_raw_Index(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -718,9 +718,9 @@ pub mod flann {
 		}
 
 		#[inline]
-		fn load(&mut self, features: &impl ToInputArray, filename: &str) -> Result<bool> {
+		fn load(&mut self, features: &impl ToInputArray, filename: impl AsRef<OsStr>) -> Result<bool> {
 			input_array_arg!(features);
-			extern_container_arg!(filename);
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_flann_Index_load_const__InputArrayR_const_StringR(self.as_raw_mut_Index(), features.as_raw__InputArray(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1307,8 +1307,8 @@ pub mod flann {
 
 	impl SavedIndexParams {
 		#[inline]
-		pub fn new(filename: &str) -> Result<crate::flann::SavedIndexParams> {
-			extern_container_arg!(filename);
+		pub fn new(filename: impl AsRef<OsStr>) -> Result<crate::flann::SavedIndexParams> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_flann_SavedIndexParams_SavedIndexParams_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

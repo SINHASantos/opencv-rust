@@ -2692,8 +2692,8 @@ pub mod optflow {
 
 	impl PCAPrior {
 		#[inline]
-		pub fn new(path_to_prior: &str) -> Result<crate::optflow::PCAPrior> {
-			extern_container_arg!(path_to_prior);
+		pub fn new(path_to_prior: impl AsRef<OsStr>) -> Result<crate::optflow::PCAPrior> {
+			path_arg!(path_to_prior);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_optflow_PCAPrior_PCAPrior_const_charX(path_to_prior.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

@@ -723,8 +723,8 @@ pub mod imgcodecs {
 	/// ## See also
 	/// cv::haveImageWriter, cv::imread, cv::imdecode
 	#[inline]
-	pub fn have_image_reader(filename: &str) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn have_image_reader(filename: impl AsRef<OsStr>) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_haveImageReader_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -749,8 +749,8 @@ pub mod imgcodecs {
 	/// ## See also
 	/// cv::haveImageReader, cv::imwrite, cv::imencode
 	#[inline]
-	pub fn have_image_writer(filename: &str) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn have_image_writer(filename: impl AsRef<OsStr>) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_haveImageWriter_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -773,8 +773,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imcount] function uses the following default values for its arguments:
 	/// * flags: IMREAD_COLOR_BGR
 	#[inline]
-	pub fn imcount_def(filename: &str) -> Result<size_t> {
-		extern_container_arg!(filename);
+	pub fn imcount_def(filename: impl AsRef<OsStr>) -> Result<size_t> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imcount_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -796,8 +796,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * flags: IMREAD_COLOR_BGR
 	#[inline]
-	pub fn imcount(filename: &str, flags: i32) -> Result<size_t> {
-		extern_container_arg!(filename);
+	pub fn imcount(filename: impl AsRef<OsStr>, flags: i32) -> Result<size_t> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imcount_const_StringR_int(filename.opencv_as_extern(), flags, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1231,8 +1231,8 @@ pub mod imgcodecs {
 	/// ## Returns
 	/// The loaded image as a cv::Mat object. If the image cannot be read, the function returns an empty matrix.
 	#[inline]
-	pub fn imread_with_metadata(filename: &str, metadata_types: &mut core::Vector<i32>, metadata: &mut impl ToOutputArray, flags: i32) -> Result<core::Mat> {
-		extern_container_arg!(filename);
+	pub fn imread_with_metadata(filename: impl AsRef<OsStr>, metadata_types: &mut core::Vector<i32>, metadata: &mut impl ToOutputArray, flags: i32) -> Result<core::Mat> {
+		path_arg!(filename);
 		output_array_arg!(metadata);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imreadWithMetadata_const_StringR_vectorLintGR_const__OutputArrayR_int(filename.opencv_as_extern(), metadata_types.as_raw_mut_VectorOfi32(), metadata.as_raw__OutputArray(), flags, ocvrs_return.as_mut_ptr()) };
@@ -1300,8 +1300,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imread] function uses the following default values for its arguments:
 	/// * flags: IMREAD_COLOR_BGR
 	#[inline]
-	pub fn imread_def(filename: &str) -> Result<core::Mat> {
-		extern_container_arg!(filename);
+	pub fn imread_def(filename: impl AsRef<OsStr>) -> Result<core::Mat> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imread_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1325,8 +1325,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imread_1] function uses the following default values for its arguments:
 	/// * flags: IMREAD_COLOR_BGR
 	#[inline]
-	pub fn imread_1_def(filename: &str, dst: &mut impl ToOutputArray) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn imread_1_def(filename: impl AsRef<OsStr>, dst: &mut impl ToOutputArray) -> Result<()> {
+		path_arg!(filename);
 		output_array_arg!(dst);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imread_const_StringR_const__OutputArrayR(filename.opencv_as_extern(), dst.as_raw__OutputArray(), ocvrs_return.as_mut_ptr()) };
@@ -1349,8 +1349,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * flags: IMREAD_COLOR_BGR
 	#[inline]
-	pub fn imread_1(filename: &str, dst: &mut impl ToOutputArray, flags: i32) -> Result<()> {
-		extern_container_arg!(filename);
+	pub fn imread_1(filename: impl AsRef<OsStr>, dst: &mut impl ToOutputArray, flags: i32) -> Result<()> {
+		path_arg!(filename);
 		output_array_arg!(dst);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imread_const_StringR_const__OutputArrayR_int(filename.opencv_as_extern(), dst.as_raw__OutputArray(), flags, ocvrs_return.as_mut_ptr()) };
@@ -1416,8 +1416,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * flags: IMREAD_COLOR_BGR
 	#[inline]
-	pub fn imread(filename: &str, flags: i32) -> Result<core::Mat> {
-		extern_container_arg!(filename);
+	pub fn imread(filename: impl AsRef<OsStr>, flags: i32) -> Result<core::Mat> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imread_const_StringR_int(filename.opencv_as_extern(), flags, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1444,8 +1444,8 @@ pub mod imgcodecs {
 	/// * start: 0
 	/// * count: INT16_MAX
 	#[inline]
-	pub fn imreadanimation_def(filename: &str, animation: &mut impl crate::imgcodecs::AnimationTrait) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imreadanimation_def(filename: impl AsRef<OsStr>, animation: &mut impl crate::imgcodecs::AnimationTrait) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imreadanimation_const_StringR_AnimationR(filename.opencv_as_extern(), animation.as_raw_mut_Animation(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1470,8 +1470,8 @@ pub mod imgcodecs {
 	/// * start: 0
 	/// * count: INT16_MAX
 	#[inline]
-	pub fn imreadanimation(filename: &str, animation: &mut impl crate::imgcodecs::AnimationTrait, start: i32, count: i32) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imreadanimation(filename: impl AsRef<OsStr>, animation: &mut impl crate::imgcodecs::AnimationTrait, start: i32, count: i32) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imreadanimation_const_StringR_AnimationR_int_int(filename.opencv_as_extern(), animation.as_raw_mut_Animation(), start, count, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1495,8 +1495,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imreadmulti] function uses the following default values for its arguments:
 	/// * flags: IMREAD_COLOR_BGR
 	#[inline]
-	pub fn imreadmulti_def(filename: &str, mats: &mut core::Vector<core::Mat>) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imreadmulti_def(filename: impl AsRef<OsStr>, mats: &mut core::Vector<core::Mat>) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imreadmulti_const_StringR_vectorLMatGR(filename.opencv_as_extern(), mats.as_raw_mut_VectorOfMat(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1519,8 +1519,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * flags: IMREAD_COLOR_BGR
 	#[inline]
-	pub fn imreadmulti(filename: &str, mats: &mut core::Vector<core::Mat>, flags: i32) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imreadmulti(filename: impl AsRef<OsStr>, mats: &mut core::Vector<core::Mat>, flags: i32) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imreadmulti_const_StringR_vectorLMatGR_int(filename.opencv_as_extern(), mats.as_raw_mut_VectorOfMat(), flags, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1544,8 +1544,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imreadmulti_range] function uses the following default values for its arguments:
 	/// * flags: IMREAD_ANYCOLOR
 	#[inline]
-	pub fn imreadmulti_range_def(filename: &str, mats: &mut core::Vector<core::Mat>, start: i32, count: i32) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imreadmulti_range_def(filename: impl AsRef<OsStr>, mats: &mut core::Vector<core::Mat>, start: i32, count: i32) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imreadmulti_const_StringR_vectorLMatGR_int_int(filename.opencv_as_extern(), mats.as_raw_mut_VectorOfMat(), start, count, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1568,8 +1568,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * flags: IMREAD_ANYCOLOR
 	#[inline]
-	pub fn imreadmulti_range(filename: &str, mats: &mut core::Vector<core::Mat>, start: i32, count: i32, flags: i32) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imreadmulti_range(filename: impl AsRef<OsStr>, mats: &mut core::Vector<core::Mat>, start: i32, count: i32, flags: i32) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imreadmulti_const_StringR_vectorLMatGR_int_int_int(filename.opencv_as_extern(), mats.as_raw_mut_VectorOfMat(), start, count, flags, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1591,8 +1591,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imwrite_with_metadata] function uses the following default values for its arguments:
 	/// * params: std::vector<int>()
 	#[inline]
-	pub fn imwrite_with_metadata_def(filename: &str, img: &impl ToInputArray, metadata_types: &core::Vector<i32>, metadata: &impl ToInputArray) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imwrite_with_metadata_def(filename: impl AsRef<OsStr>, img: &impl ToInputArray, metadata_types: &core::Vector<i32>, metadata: &impl ToInputArray) -> Result<bool> {
+		path_arg!(filename);
 		input_array_arg!(img);
 		input_array_arg!(metadata);
 		return_send!(via ocvrs_return);
@@ -1615,8 +1615,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * params: std::vector<int>()
 	#[inline]
-	pub fn imwrite_with_metadata(filename: &str, img: &impl ToInputArray, metadata_types: &core::Vector<i32>, metadata: &impl ToInputArray, params: &core::Vector<i32>) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imwrite_with_metadata(filename: impl AsRef<OsStr>, img: &impl ToInputArray, metadata_types: &core::Vector<i32>, metadata: &impl ToInputArray, params: &core::Vector<i32>) -> Result<bool> {
+		path_arg!(filename);
 		input_array_arg!(img);
 		input_array_arg!(metadata);
 		return_send!(via ocvrs_return);
@@ -1695,8 +1695,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imwrite] function uses the following default values for its arguments:
 	/// * params: std::vector<int>()
 	#[inline]
-	pub fn imwrite_def(filename: &str, img: &impl ToInputArray) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imwrite_def(filename: impl AsRef<OsStr>, img: &impl ToInputArray) -> Result<bool> {
+		path_arg!(filename);
 		input_array_arg!(img);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imwrite_const_StringR_const__InputArrayR(filename.opencv_as_extern(), img.as_raw__InputArray(), ocvrs_return.as_mut_ptr()) };
@@ -1773,8 +1773,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * params: std::vector<int>()
 	#[inline]
-	pub fn imwrite(filename: &str, img: &impl ToInputArray, params: &core::Vector<i32>) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imwrite(filename: impl AsRef<OsStr>, img: &impl ToInputArray, params: &core::Vector<i32>) -> Result<bool> {
+		path_arg!(filename);
 		input_array_arg!(img);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imwrite_const_StringR_const__InputArrayR_const_vectorLintGR(filename.opencv_as_extern(), img.as_raw__InputArray(), params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
@@ -1801,8 +1801,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imwriteanimation] function uses the following default values for its arguments:
 	/// * params: std::vector<int>()
 	#[inline]
-	pub fn imwriteanimation_def(filename: &str, animation: &impl crate::imgcodecs::AnimationTraitConst) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imwriteanimation_def(filename: impl AsRef<OsStr>, animation: &impl crate::imgcodecs::AnimationTraitConst) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imwriteanimation_const_StringR_const_AnimationR(filename.opencv_as_extern(), animation.as_raw_Animation(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1827,8 +1827,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * params: std::vector<int>()
 	#[inline]
-	pub fn imwriteanimation(filename: &str, animation: &impl crate::imgcodecs::AnimationTraitConst, params: &core::Vector<i32>) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imwriteanimation(filename: impl AsRef<OsStr>, animation: &impl crate::imgcodecs::AnimationTraitConst, params: &core::Vector<i32>) -> Result<bool> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imwriteanimation_const_StringR_const_AnimationR_const_vectorLintGR(filename.opencv_as_extern(), animation.as_raw_Animation(), params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1842,8 +1842,8 @@ pub mod imgcodecs {
 	/// This alternative version of [imwritemulti] function uses the following default values for its arguments:
 	/// * params: std::vector<int>()
 	#[inline]
-	pub fn imwritemulti_def(filename: &str, img: &impl ToInputArray) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imwritemulti_def(filename: impl AsRef<OsStr>, img: &impl ToInputArray) -> Result<bool> {
+		path_arg!(filename);
 		input_array_arg!(img);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imwritemulti_const_StringR_const__InputArrayR(filename.opencv_as_extern(), img.as_raw__InputArray(), ocvrs_return.as_mut_ptr()) };
@@ -1857,8 +1857,8 @@ pub mod imgcodecs {
 	/// ## C++ default parameters
 	/// * params: std::vector<int>()
 	#[inline]
-	pub fn imwritemulti(filename: &str, img: &impl ToInputArray, params: &core::Vector<i32>) -> Result<bool> {
-		extern_container_arg!(filename);
+	pub fn imwritemulti(filename: impl AsRef<OsStr>, img: &impl ToInputArray, params: &core::Vector<i32>) -> Result<bool> {
+		path_arg!(filename);
 		input_array_arg!(img);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_imwritemulti_const_StringR_const__InputArrayR_const_vectorLintGR(filename.opencv_as_extern(), img.as_raw__InputArray(), params.as_raw_VectorOfi32(), ocvrs_return.as_mut_ptr()) };
@@ -2117,8 +2117,8 @@ pub mod imgcodecs {
 		}
 
 		#[inline]
-		pub fn new(filename: &str, flags: i32) -> Result<crate::imgcodecs::ImageCollection> {
-			extern_container_arg!(filename);
+		pub fn new(filename: impl AsRef<OsStr>, flags: i32) -> Result<crate::imgcodecs::ImageCollection> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ImageCollection_ImageCollection_const_StringR_int(filename.opencv_as_extern(), flags, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

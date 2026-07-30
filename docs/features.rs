@@ -788,8 +788,8 @@ pub mod features {
 		/// ## C++ default parameters
 		/// * params: ALIKED::Params()
 		#[inline]
-		pub fn create(model_path: &str, params: crate::features::ALIKED_Params) -> Result<core::Ptr<crate::features::ALIKED>> {
-			extern_container_arg!(model_path);
+		pub fn create(model_path: impl AsRef<OsStr>, params: crate::features::ALIKED_Params) -> Result<core::Ptr<crate::features::ALIKED>> {
+			path_arg!(model_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ALIKED_create_const_StringR_const_ParamsR(model_path.opencv_as_extern(), &params, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -807,8 +807,8 @@ pub mod features {
 		/// This alternative version of [ALIKED::create] function uses the following default values for its arguments:
 		/// * params: ALIKED::Params()
 		#[inline]
-		pub fn create_def(model_path: &str) -> Result<core::Ptr<crate::features::ALIKED>> {
-			extern_container_arg!(model_path);
+		pub fn create_def(model_path: impl AsRef<OsStr>) -> Result<core::Ptr<crate::features::ALIKED>> {
+			path_arg!(model_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ALIKED_create_const_StringR(model_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1111,8 +1111,8 @@ pub mod features {
 		/// ## C++ default parameters
 		/// * prefault: false
 		#[inline]
-		fn save(&mut self, filename: &str, prefault: bool) -> Result<()> {
-			extern_container_arg!(filename);
+		fn save(&mut self, filename: impl AsRef<OsStr>, prefault: bool) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ANNIndex_save_const_StringR_bool(self.as_raw_mut_ANNIndex(), filename.opencv_as_extern(), prefault, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1131,8 +1131,8 @@ pub mod features {
 		/// This alternative version of [ANNIndexTrait::save] function uses the following default values for its arguments:
 		/// * prefault: false
 		#[inline]
-		fn save_def(&mut self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn save_def(&mut self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ANNIndex_save_const_StringR(self.as_raw_mut_ANNIndex(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1150,8 +1150,8 @@ pub mod features {
 		/// ## C++ default parameters
 		/// * prefault: false
 		#[inline]
-		fn load(&mut self, filename: &str, prefault: bool) -> Result<()> {
-			extern_container_arg!(filename);
+		fn load(&mut self, filename: impl AsRef<OsStr>, prefault: bool) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ANNIndex_load_const_StringR_bool(self.as_raw_mut_ANNIndex(), filename.opencv_as_extern(), prefault, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1170,8 +1170,8 @@ pub mod features {
 		/// This alternative version of [ANNIndexTrait::load] function uses the following default values for its arguments:
 		/// * prefault: false
 		#[inline]
-		fn load_def(&mut self, filename: &str) -> Result<()> {
-			extern_container_arg!(filename);
+		fn load_def(&mut self, filename: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ANNIndex_load_const_StringR(self.as_raw_mut_ANNIndex(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1205,8 +1205,8 @@ pub mod features {
 		/// ## Parameters
 		/// * filename: Filename of the index to be built.
 		#[inline]
-		fn set_on_disk_build(&mut self, filename: &str) -> Result<bool> {
-			extern_container_arg!(filename);
+		fn set_on_disk_build(&mut self, filename: impl AsRef<OsStr>) -> Result<bool> {
+			path_arg!(filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ANNIndex_setOnDiskBuild_const_StringR(self.as_raw_mut_ANNIndex(), filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1638,8 +1638,8 @@ pub mod features {
 		/// * backend_id: 0
 		/// * target_id: 0
 		#[inline]
-		pub fn create(model_path: &str, max_keypoints: i32, score_threshold: f32, image_size: core::Size, backend_id: i32, target_id: i32) -> Result<core::Ptr<crate::features::DISK>> {
-			extern_container_arg!(model_path);
+		pub fn create(model_path: impl AsRef<OsStr>, max_keypoints: i32, score_threshold: f32, image_size: core::Size, backend_id: i32, target_id: i32) -> Result<core::Ptr<crate::features::DISK>> {
+			path_arg!(model_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_DISK_create_const_StringR_int_float_const_SizeR_int_int(model_path.opencv_as_extern(), max_keypoints, score_threshold, &image_size, backend_id, target_id, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1669,8 +1669,8 @@ pub mod features {
 		/// * backend_id: 0
 		/// * target_id: 0
 		#[inline]
-		pub fn create_def(model_path: &str) -> Result<core::Ptr<crate::features::DISK>> {
-			extern_container_arg!(model_path);
+		pub fn create_def(model_path: impl AsRef<OsStr>) -> Result<core::Ptr<crate::features::DISK>> {
+			path_arg!(model_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_DISK_create_const_StringR(model_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2168,8 +2168,8 @@ pub mod features {
 		}
 
 		#[inline]
-		fn write(&self, file_name: &str) -> Result<()> {
-			extern_container_arg!(file_name);
+		fn write(&self, file_name: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_DescriptorMatcher_write_const_const_StringR(self.as_raw_DescriptorMatcher(), file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2546,8 +2546,8 @@ pub mod features {
 		}
 
 		#[inline]
-		fn read(&mut self, file_name: &str) -> Result<()> {
-			extern_container_arg!(file_name);
+		fn read(&mut self, file_name: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_DescriptorMatcher_read_const_StringR(self.as_raw_mut_DescriptorMatcher(), file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2829,8 +2829,8 @@ pub mod features {
 		}
 
 		#[inline]
-		fn write(&self, file_name: &str) -> Result<()> {
-			extern_container_arg!(file_name);
+		fn write(&self, file_name: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_Feature2D_write_const_const_StringR(self.as_raw_Feature2D(), file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -3076,8 +3076,8 @@ pub mod features {
 		}
 
 		#[inline]
-		fn read(&mut self, file_name: &str) -> Result<()> {
-			extern_container_arg!(file_name);
+		fn read(&mut self, file_name: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_Feature2D_read_const_StringR(self.as_raw_mut_Feature2D(), file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -3796,8 +3796,8 @@ pub mod features {
 		/// * backend: 0
 		/// * target: 0
 		#[inline]
-		pub fn create(model_path: &str, score_threshold: f32, backend: i32, target: i32) -> Result<core::Ptr<crate::features::LightGlueMatcher>> {
-			extern_container_arg!(model_path);
+		pub fn create(model_path: impl AsRef<OsStr>, score_threshold: f32, backend: i32, target: i32) -> Result<core::Ptr<crate::features::LightGlueMatcher>> {
+			path_arg!(model_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_LightGlueMatcher_create_const_StringR_float_int_int(model_path.opencv_as_extern(), score_threshold, backend, target, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -3819,8 +3819,8 @@ pub mod features {
 		/// * backend: 0
 		/// * target: 0
 		#[inline]
-		pub fn create_def(model_path: &str) -> Result<core::Ptr<crate::features::LightGlueMatcher>> {
-			extern_container_arg!(model_path);
+		pub fn create_def(model_path: impl AsRef<OsStr>) -> Result<core::Ptr<crate::features::LightGlueMatcher>> {
+			path_arg!(model_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_LightGlueMatcher_create_const_StringR(model_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

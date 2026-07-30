@@ -372,8 +372,8 @@ pub mod text {
 	/// * non_max_suppression: true
 	/// * min_probability_diff: (float)0.1
 	#[inline]
-	pub fn create_er_filter_nm1_from_file_def(filename: &str) -> Result<core::Ptr<crate::text::ERFilter>> {
-		extern_container_arg!(filename);
+	pub fn create_er_filter_nm1_from_file_def(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::ERFilter>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_createERFilterNM1_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -416,8 +416,8 @@ pub mod text {
 	/// * non_max_suppression: true
 	/// * min_probability_diff: (float)0.1
 	#[inline]
-	pub fn create_er_filter_nm1_from_file(filename: &str, threshold_delta: i32, min_area: f32, max_area: f32, min_probability: f32, non_max_suppression: bool, min_probability_diff: f32) -> Result<core::Ptr<crate::text::ERFilter>> {
-		extern_container_arg!(filename);
+	pub fn create_er_filter_nm1_from_file(filename: impl AsRef<OsStr>, threshold_delta: i32, min_area: f32, max_area: f32, min_probability: f32, non_max_suppression: bool, min_probability_diff: f32) -> Result<core::Ptr<crate::text::ERFilter>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_createERFilterNM1_const_StringR_int_float_float_float_bool_float(filename.opencv_as_extern(), threshold_delta, min_area, max_area, min_probability, non_max_suppression, min_probability_diff, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -497,8 +497,8 @@ pub mod text {
 	/// This alternative version of [create_er_filter_nm2_from_file] function uses the following default values for its arguments:
 	/// * min_probability: (float)0.3
 	#[inline]
-	pub fn create_er_filter_nm2_from_file_def(filename: &str) -> Result<core::Ptr<crate::text::ERFilter>> {
-		extern_container_arg!(filename);
+	pub fn create_er_filter_nm2_from_file_def(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::ERFilter>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_createERFilterNM2_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -527,8 +527,8 @@ pub mod text {
 	/// ## C++ default parameters
 	/// * min_probability: (float)0.3
 	#[inline]
-	pub fn create_er_filter_nm2_from_file(filename: &str, min_probability: f32) -> Result<core::Ptr<crate::text::ERFilter>> {
-		extern_container_arg!(filename);
+	pub fn create_er_filter_nm2_from_file(filename: impl AsRef<OsStr>, min_probability: f32) -> Result<core::Ptr<crate::text::ERFilter>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_createERFilterNM2_const_StringR_float(filename.opencv_as_extern(), min_probability, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -616,9 +616,9 @@ pub mod text {
 	/// * filename: String()
 	/// * min_probability: (float)0.5
 	#[inline]
-	pub fn detect_regions_from_file(image: &impl ToInputArray, er_filter1: &core::Ptr<crate::text::ERFilter>, er_filter2: &core::Ptr<crate::text::ERFilter>, groups_rects: &mut core::Vector<core::Rect>, method: i32, filename: &str, min_probability: f32) -> Result<()> {
+	pub fn detect_regions_from_file(image: &impl ToInputArray, er_filter1: &core::Ptr<crate::text::ERFilter>, er_filter2: &core::Ptr<crate::text::ERFilter>, groups_rects: &mut core::Vector<core::Rect>, method: i32, filename: impl AsRef<OsStr>, min_probability: f32) -> Result<()> {
 		input_array_arg!(image);
-		extern_container_arg!(filename);
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_detectRegions_const__InputArrayR_const_PtrLERFilterGR_const_PtrLERFilterGR_vectorLRectGR_int_const_StringR_float(image.as_raw__InputArray(), er_filter1.as_raw_PtrOfERFilter(), er_filter2.as_raw_PtrOfERFilter(), groups_rects.as_raw_mut_VectorOfRect(), method, filename.opencv_as_extern(), min_probability, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -750,10 +750,10 @@ pub mod text {
 	/// * filename: std::string()
 	/// * min_probablity: 0.5
 	#[inline]
-	pub fn er_grouping(img: &impl ToInputArray, channels: &impl ToInputArray, regions: &mut core::Vector<core::Vector<crate::text::ERStat>>, groups: &mut core::Vector<core::Vector<core::Vec2i>>, groups_rects: &mut core::Vector<core::Rect>, method: i32, filename: &str, min_probablity: f32) -> Result<()> {
+	pub fn er_grouping(img: &impl ToInputArray, channels: &impl ToInputArray, regions: &mut core::Vector<core::Vector<crate::text::ERStat>>, groups: &mut core::Vector<core::Vector<core::Vec2i>>, groups_rects: &mut core::Vector<core::Rect>, method: i32, filename: impl AsRef<OsStr>, min_probablity: f32) -> Result<()> {
 		input_array_arg!(img);
 		input_array_arg!(channels);
-		extern_container_arg!(filename);
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_erGrouping_const__InputArrayR_const__InputArrayR_vectorLvectorLERStatGGR_vectorLvectorLVec2iGGR_vectorLRectGR_int_const_stringR_float(img.as_raw__InputArray(), channels.as_raw__InputArray(), regions.as_raw_mut_VectorOfVectorOfERStat(), groups.as_raw_mut_VectorOfVectorOfVec2i(), groups_rects.as_raw_mut_VectorOfRect(), method, filename.opencv_as_extern(), min_probablity, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -782,10 +782,10 @@ pub mod text {
 	/// * filename: String()
 	/// * min_probablity: (float)0.5
 	#[inline]
-	pub fn er_grouping_1(image: &impl ToInputArray, channel: &impl ToInputArray, mut regions: core::Vector<core::Vector<core::Point>>, groups_rects: &mut core::Vector<core::Rect>, method: i32, filename: &str, min_probablity: f32) -> Result<()> {
+	pub fn er_grouping_1(image: &impl ToInputArray, channel: &impl ToInputArray, mut regions: core::Vector<core::Vector<core::Point>>, groups_rects: &mut core::Vector<core::Rect>, method: i32, filename: impl AsRef<OsStr>, min_probablity: f32) -> Result<()> {
 		input_array_arg!(image);
 		input_array_arg!(channel);
-		extern_container_arg!(filename);
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_erGrouping_const__InputArrayR_const__InputArrayR_vectorLvectorLPointGG_vectorLRectGR_int_const_StringR_float(image.as_raw__InputArray(), channel.as_raw__InputArray(), regions.as_raw_mut_VectorOfVectorOfPoint(), groups_rects.as_raw_mut_VectorOfRect(), method, filename.opencv_as_extern(), min_probablity, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -800,8 +800,8 @@ pub mod text {
 	///
 	/// returns a pointer to ERFilter::Callback.
 	#[inline]
-	pub fn load_classifier_nm1(filename: &str) -> Result<core::Ptr<crate::text::ERFilter_Callback>> {
-		extern_container_arg!(filename);
+	pub fn load_classifier_nm1(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::ERFilter_Callback>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_loadClassifierNM1_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -817,8 +817,8 @@ pub mod text {
 	///
 	/// returns a pointer to ERFilter::Callback.
 	#[inline]
-	pub fn load_classifier_nm2(filename: &str) -> Result<core::Ptr<crate::text::ERFilter_Callback>> {
-		extern_container_arg!(filename);
+	pub fn load_classifier_nm2(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::ERFilter_Callback>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_loadClassifierNM2_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -837,8 +837,8 @@ pub mod text {
 	/// a linear classifier. It is applied to the input image in a sliding window fashion, providing a set of recognitions
 	/// at each window location.
 	#[inline]
-	pub fn load_ocr_beam_search_classifier_cnn(filename: &str) -> Result<core::Ptr<crate::text::OCRBeamSearchDecoder_ClassifierCallback>> {
-		extern_container_arg!(filename);
+	pub fn load_ocr_beam_search_classifier_cnn(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::OCRBeamSearchDecoder_ClassifierCallback>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_loadOCRBeamSearchClassifierCNN_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -861,8 +861,8 @@ pub mod text {
 	/// **Deprecated**: use loadOCRHMMClassifier instead
 	#[deprecated = "use loadOCRHMMClassifier instead"]
 	#[inline]
-	pub fn load_ocrhmm_classifier_cnn(filename: &str) -> Result<core::Ptr<crate::text::OCRHMMDecoder_ClassifierCallback>> {
-		extern_container_arg!(filename);
+	pub fn load_ocrhmm_classifier_cnn(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::OCRHMMDecoder_ClassifierCallback>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_loadOCRHMMClassifierCNN_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -887,8 +887,8 @@ pub mod text {
 	/// **Deprecated**: loadOCRHMMClassifier instead
 	#[deprecated = "loadOCRHMMClassifier instead"]
 	#[inline]
-	pub fn load_ocrhmm_classifier_nm(filename: &str) -> Result<core::Ptr<crate::text::OCRHMMDecoder_ClassifierCallback>> {
-		extern_container_arg!(filename);
+	pub fn load_ocrhmm_classifier_nm(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::OCRHMMDecoder_ClassifierCallback>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_loadOCRHMMClassifierNM_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -904,8 +904,8 @@ pub mod text {
 	///
 	/// * classifier: Can be one of classifier_type enum values.
 	#[inline]
-	pub fn load_ocrhmm_classifier(filename: &str, classifier: i32) -> Result<core::Ptr<crate::text::OCRHMMDecoder_ClassifierCallback>> {
-		extern_container_arg!(filename);
+	pub fn load_ocrhmm_classifier(filename: impl AsRef<OsStr>, classifier: i32) -> Result<core::Ptr<crate::text::OCRHMMDecoder_ClassifierCallback>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_text_loadOCRHMMClassifier_const_StringR_int(filename.opencv_as_extern(), classifier, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1718,8 +1718,8 @@ pub mod text {
 		/// * mode: OCR_DECODER_VITERBI
 		/// * beam_size: 500
 		#[inline]
-		pub fn create_from_file(filename: &str, vocabulary: &str, transition_probabilities_table: &impl ToInputArray, emission_probabilities_table: &impl ToInputArray, mode: crate::text::decoder_mode, beam_size: i32) -> Result<core::Ptr<crate::text::OCRBeamSearchDecoder>> {
-			extern_container_arg!(filename);
+		pub fn create_from_file(filename: impl AsRef<OsStr>, vocabulary: &str, transition_probabilities_table: &impl ToInputArray, emission_probabilities_table: &impl ToInputArray, mode: crate::text::decoder_mode, beam_size: i32) -> Result<core::Ptr<crate::text::OCRBeamSearchDecoder>> {
+			path_arg!(filename);
 			extern_container_arg!(vocabulary);
 			input_array_arg!(transition_probabilities_table);
 			input_array_arg!(emission_probabilities_table);
@@ -1760,8 +1760,8 @@ pub mod text {
 		/// * mode: OCR_DECODER_VITERBI
 		/// * beam_size: 500
 		#[inline]
-		pub fn create_from_file_def(filename: &str, vocabulary: &str, transition_probabilities_table: &impl ToInputArray, emission_probabilities_table: &impl ToInputArray) -> Result<core::Ptr<crate::text::OCRBeamSearchDecoder>> {
-			extern_container_arg!(filename);
+		pub fn create_from_file_def(filename: impl AsRef<OsStr>, vocabulary: &str, transition_probabilities_table: &impl ToInputArray, emission_probabilities_table: &impl ToInputArray) -> Result<core::Ptr<crate::text::OCRBeamSearchDecoder>> {
+			path_arg!(filename);
 			extern_container_arg!(vocabulary);
 			input_array_arg!(transition_probabilities_table);
 			input_array_arg!(emission_probabilities_table);
@@ -2220,8 +2220,8 @@ pub mod text {
 		/// * mode: OCR_DECODER_VITERBI
 		/// * classifier: OCR_KNN_CLASSIFIER
 		#[inline]
-		pub fn create_from_file(filename: &str, vocabulary: &str, transition_probabilities_table: &impl ToInputArray, emission_probabilities_table: &impl ToInputArray, mode: i32, classifier: i32) -> Result<core::Ptr<crate::text::OCRHMMDecoder>> {
-			extern_container_arg!(filename);
+		pub fn create_from_file(filename: impl AsRef<OsStr>, vocabulary: &str, transition_probabilities_table: &impl ToInputArray, emission_probabilities_table: &impl ToInputArray, mode: i32, classifier: i32) -> Result<core::Ptr<crate::text::OCRHMMDecoder>> {
+			path_arg!(filename);
 			extern_container_arg!(vocabulary);
 			input_array_arg!(transition_probabilities_table);
 			input_array_arg!(emission_probabilities_table);
@@ -2260,8 +2260,8 @@ pub mod text {
 		/// * mode: OCR_DECODER_VITERBI
 		/// * classifier: OCR_KNN_CLASSIFIER
 		#[inline]
-		pub fn create_from_file_def(filename: &str, vocabulary: &str, transition_probabilities_table: &impl ToInputArray, emission_probabilities_table: &impl ToInputArray) -> Result<core::Ptr<crate::text::OCRHMMDecoder>> {
-			extern_container_arg!(filename);
+		pub fn create_from_file_def(filename: impl AsRef<OsStr>, vocabulary: &str, transition_probabilities_table: &impl ToInputArray, emission_probabilities_table: &impl ToInputArray) -> Result<core::Ptr<crate::text::OCRHMMDecoder>> {
+			path_arg!(filename);
 			extern_container_arg!(vocabulary);
 			input_array_arg!(transition_probabilities_table);
 			input_array_arg!(emission_probabilities_table);
@@ -2654,10 +2654,10 @@ pub mod text {
 	impl OCRHolisticWordRecognizer {
 		/// Creates an instance of the OCRHolisticWordRecognizer class.
 		#[inline]
-		pub fn create(arch_filename: &str, weights_filename: &str, words_filename: &str) -> Result<core::Ptr<crate::text::OCRHolisticWordRecognizer>> {
-			extern_container_arg!(arch_filename);
-			extern_container_arg!(weights_filename);
-			extern_container_arg!(words_filename);
+		pub fn create(arch_filename: impl AsRef<OsStr>, weights_filename: impl AsRef<OsStr>, words_filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::OCRHolisticWordRecognizer>> {
+			path_arg!(arch_filename);
+			path_arg!(weights_filename);
+			path_arg!(words_filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_text_OCRHolisticWordRecognizer_create_const_stringR_const_stringR_const_stringR(arch_filename.opencv_as_extern(), weights_filename.opencv_as_extern(), words_filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -2877,8 +2877,8 @@ pub mod text {
 		/// * oem: OEM_DEFAULT
 		/// * psmode: PSM_AUTO
 		#[inline]
-		pub fn create(datapath: &str, language: &str, char_whitelist: &str, oem: i32, psmode: i32) -> Result<core::Ptr<crate::text::OCRTesseract>> {
-			extern_container_arg!(datapath);
+		pub fn create(datapath: impl AsRef<OsStr>, language: &str, char_whitelist: &str, oem: i32, psmode: i32) -> Result<core::Ptr<crate::text::OCRTesseract>> {
+			path_arg!(datapath);
 			extern_container_arg!(language);
 			extern_container_arg!(char_whitelist);
 			return_send!(via ocvrs_return);
@@ -3228,9 +3228,9 @@ pub mod text {
 		/// * detectionSizes: a list of sizes for multiscale detection. The values`[(300,300),(700,500),(700,300),(700,700),(1600,1600)]` are
 		/// recommended in [LiaoSBWL17](https://docs.opencv.org/5.0.0/d0/de3/citelist.html#CITEREF_LiaoSBWL17) to achieve the best quality.
 		#[inline]
-		pub fn create_with_sizes(model_arch_filename: &str, model_weights_filename: &str, mut detection_sizes: core::Vector<core::Size>) -> Result<core::Ptr<crate::text::TextDetectorCNN>> {
-			extern_container_arg!(model_arch_filename);
-			extern_container_arg!(model_weights_filename);
+		pub fn create_with_sizes(model_arch_filename: impl AsRef<OsStr>, model_weights_filename: impl AsRef<OsStr>, mut detection_sizes: core::Vector<core::Size>) -> Result<core::Ptr<crate::text::TextDetectorCNN>> {
+			path_arg!(model_arch_filename);
+			path_arg!(model_weights_filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_text_TextDetectorCNN_create_const_StringR_const_StringR_vectorLSizeG(model_arch_filename.opencv_as_extern(), model_weights_filename.opencv_as_extern(), detection_sizes.as_raw_mut_VectorOfSize(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -3249,9 +3249,9 @@ pub mod text {
 		///
 		/// ## Overloaded parameters
 		#[inline]
-		pub fn create(model_arch_filename: &str, model_weights_filename: &str) -> Result<core::Ptr<crate::text::TextDetectorCNN>> {
-			extern_container_arg!(model_arch_filename);
-			extern_container_arg!(model_weights_filename);
+		pub fn create(model_arch_filename: impl AsRef<OsStr>, model_weights_filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::text::TextDetectorCNN>> {
+			path_arg!(model_arch_filename);
+			path_arg!(model_weights_filename);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_text_TextDetectorCNN_create_const_StringR_const_StringR(model_arch_filename.opencv_as_extern(), model_weights_filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

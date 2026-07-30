@@ -976,8 +976,8 @@ pub mod surface_matching {
 		}
 
 		#[inline]
-		fn write_pose(&mut self, file_name: &str) -> Result<i32> {
-			extern_container_arg!(file_name);
+		fn write_pose(&mut self, file_name: impl AsRef<OsStr>) -> Result<i32> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ppf_match_3d_Pose3D_writePose_const_stringR(self.as_raw_mut_Pose3D(), file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -986,8 +986,8 @@ pub mod surface_matching {
 		}
 
 		#[inline]
-		fn read_pose(&mut self, file_name: &str) -> Result<i32> {
-			extern_container_arg!(file_name);
+		fn read_pose(&mut self, file_name: impl AsRef<OsStr>) -> Result<i32> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ppf_match_3d_Pose3D_readPose_const_stringR(self.as_raw_mut_Pose3D(), file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1134,8 +1134,8 @@ pub mod surface_matching {
 		}
 
 		#[inline]
-		fn write_pose_cluster(&mut self, file_name: &str) -> Result<i32> {
-			extern_container_arg!(file_name);
+		fn write_pose_cluster(&mut self, file_name: impl AsRef<OsStr>) -> Result<i32> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ppf_match_3d_PoseCluster3D_writePoseCluster_const_stringR(self.as_raw_mut_PoseCluster3D(), file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1144,8 +1144,8 @@ pub mod surface_matching {
 		}
 
 		#[inline]
-		fn read_pose_cluster(&mut self, file_name: &str) -> Result<i32> {
-			extern_container_arg!(file_name);
+		fn read_pose_cluster(&mut self, file_name: impl AsRef<OsStr>) -> Result<i32> {
+			path_arg!(file_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_ppf_match_3d_PoseCluster3D_readPoseCluster_const_stringR(self.as_raw_mut_PoseCluster3D(), file_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

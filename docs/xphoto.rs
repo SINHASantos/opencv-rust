@@ -399,8 +399,8 @@ pub mod xphoto {
 	/// ## C++ default parameters
 	/// * path_to_model: String()
 	#[inline]
-	pub fn create_learning_based_wb(path_to_model: &str) -> Result<core::Ptr<crate::xphoto::LearningBasedWB>> {
-		extern_container_arg!(path_to_model);
+	pub fn create_learning_based_wb(path_to_model: impl AsRef<OsStr>) -> Result<core::Ptr<crate::xphoto::LearningBasedWB>> {
+		path_arg!(path_to_model);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_xphoto_createLearningBasedWB_const_StringR(path_to_model.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);

@@ -566,8 +566,8 @@ pub mod cudacodec {
 	/// * source_params: {}
 	/// * params: VideoReaderInitParams()
 	#[inline]
-	pub fn create_video_reader_def(filename: &str) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoReader>> {
-		extern_container_arg!(filename);
+	pub fn create_video_reader_def(filename: impl AsRef<OsStr>) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoReader>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_cudacodec_createVideoReader_const_StringR(filename.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -592,8 +592,8 @@ pub mod cudacodec {
 	/// * source_params: {}
 	/// * params: VideoReaderInitParams()
 	#[inline]
-	pub fn create_video_reader(filename: &str, source_params: &core::Vector<i32>, params: crate::cudacodec::CUDA_VideoReaderInitParams) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoReader>> {
-		extern_container_arg!(filename);
+	pub fn create_video_reader(filename: impl AsRef<OsStr>, source_params: &core::Vector<i32>, params: crate::cudacodec::CUDA_VideoReaderInitParams) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoReader>> {
+		path_arg!(filename);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_cudacodec_createVideoReader_const_StringR_const_vectorLintGR_const_VideoReaderInitParams(filename.opencv_as_extern(), source_params.as_raw_VectorOfi32(), &params, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -621,8 +621,8 @@ pub mod cudacodec {
 	/// * encoder_callback: 0
 	/// * stream: cuda::Stream::Null()
 	#[inline]
-	pub fn create_video_writer_def(file_name: &str, frame_size: core::Size) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoWriter>> {
-		extern_container_arg!(file_name);
+	pub fn create_video_writer_def(file_name: impl AsRef<OsStr>, frame_size: core::Size) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoWriter>> {
+		path_arg!(file_name);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_cudacodec_createVideoWriter_const_StringR_const_Size(file_name.opencv_as_extern(), &frame_size, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -649,8 +649,8 @@ pub mod cudacodec {
 	/// * encoder_callback: 0
 	/// * stream: cuda::Stream::Null()
 	#[inline]
-	pub fn create_video_writer(file_name: &str, frame_size: core::Size, codec: crate::cudacodec::CUDA_Codec, fps: f64, color_format: crate::cudacodec::CUDA_ColorFormat, mut encoder_callback: core::Ptr<crate::cudacodec::CUDA_EncoderCallback>, stream: &impl core::StreamTraitConst) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoWriter>> {
-		extern_container_arg!(file_name);
+	pub fn create_video_writer(file_name: impl AsRef<OsStr>, frame_size: core::Size, codec: crate::cudacodec::CUDA_Codec, fps: f64, color_format: crate::cudacodec::CUDA_ColorFormat, mut encoder_callback: core::Ptr<crate::cudacodec::CUDA_EncoderCallback>, stream: &impl core::StreamTraitConst) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoWriter>> {
+		path_arg!(file_name);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_cudacodec_createVideoWriter_const_StringR_const_Size_const_Codec_const_double_const_ColorFormat_PtrLEncoderCallbackG_const_StreamR(file_name.opencv_as_extern(), &frame_size, codec, fps, color_format, encoder_callback.as_raw_mut_PtrOfCUDA_EncoderCallback(), stream.as_raw_Stream(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -676,8 +676,8 @@ pub mod cudacodec {
 	/// * encoder_callback: 0
 	/// * stream: cuda::Stream::Null()
 	#[inline]
-	pub fn create_video_writer_1_def(file_name: &str, frame_size: core::Size, codec: crate::cudacodec::CUDA_Codec, fps: f64, color_format: crate::cudacodec::CUDA_ColorFormat, params: crate::cudacodec::CUDA_EncoderParams) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoWriter>> {
-		extern_container_arg!(file_name);
+	pub fn create_video_writer_1_def(file_name: impl AsRef<OsStr>, frame_size: core::Size, codec: crate::cudacodec::CUDA_Codec, fps: f64, color_format: crate::cudacodec::CUDA_ColorFormat, params: crate::cudacodec::CUDA_EncoderParams) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoWriter>> {
+		path_arg!(file_name);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_cudacodec_createVideoWriter_const_StringR_const_Size_const_Codec_const_double_const_ColorFormat_const_EncoderParamsR(file_name.opencv_as_extern(), &frame_size, codec, fps, color_format, &params, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -702,8 +702,8 @@ pub mod cudacodec {
 	/// * encoder_callback: 0
 	/// * stream: cuda::Stream::Null()
 	#[inline]
-	pub fn create_video_writer_1(file_name: &str, frame_size: core::Size, codec: crate::cudacodec::CUDA_Codec, fps: f64, color_format: crate::cudacodec::CUDA_ColorFormat, params: crate::cudacodec::CUDA_EncoderParams, mut encoder_callback: core::Ptr<crate::cudacodec::CUDA_EncoderCallback>, stream: &impl core::StreamTraitConst) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoWriter>> {
-		extern_container_arg!(file_name);
+	pub fn create_video_writer_1(file_name: impl AsRef<OsStr>, frame_size: core::Size, codec: crate::cudacodec::CUDA_Codec, fps: f64, color_format: crate::cudacodec::CUDA_ColorFormat, params: crate::cudacodec::CUDA_EncoderParams, mut encoder_callback: core::Ptr<crate::cudacodec::CUDA_EncoderCallback>, stream: &impl core::StreamTraitConst) -> Result<core::Ptr<crate::cudacodec::CUDA_VideoWriter>> {
+		path_arg!(file_name);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_cudacodec_createVideoWriter_const_StringR_const_Size_const_Codec_const_double_const_ColorFormat_const_EncoderParamsR_PtrLEncoderCallbackG_const_StreamR(file_name.opencv_as_extern(), &frame_size, codec, fps, color_format, &params, encoder_callback.as_raw_mut_PtrOfCUDA_EncoderCallback(), stream.as_raw_Stream(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);

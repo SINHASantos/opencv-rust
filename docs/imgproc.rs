@@ -10506,8 +10506,8 @@ pub mod imgproc {
 		/// * fontPathOrName: either path to the custom font or the name of embedded font: "sans", "italic" or "uni".
 		///    Empty fontPathOrName means the default embedded font.
 		#[inline]
-		pub fn new(font_path_or_name: &str) -> Result<crate::imgproc::FontFace> {
-			extern_container_arg!(font_path_or_name);
+		pub fn new(font_path_or_name: impl AsRef<OsStr>) -> Result<crate::imgproc::FontFace> {
+			path_arg!(font_path_or_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_FontFace_FontFace_const_StringR(font_path_or_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -10559,8 +10559,8 @@ pub mod imgproc {
 
 		/// loads new font face
 		#[inline]
-		fn set(&mut self, font_path_or_name: &str) -> Result<bool> {
-			extern_container_arg!(font_path_or_name);
+		fn set(&mut self, font_path_or_name: impl AsRef<OsStr>) -> Result<bool> {
+			path_arg!(font_path_or_name);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_FontFace_set_const_StringR(self.as_raw_mut_FontFace(), font_path_or_name.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

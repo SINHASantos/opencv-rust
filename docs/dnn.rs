@@ -1266,8 +1266,8 @@ pub mod dnn {
 	/// This alternative version of [read_net_from_onnx] function uses the following default values for its arguments:
 	/// * engine: ENGINE_AUTO
 	#[inline]
-	pub fn read_net_from_onnx_def(onnx_file: &str) -> Result<crate::dnn::Net> {
-		extern_container_arg!(onnx_file);
+	pub fn read_net_from_onnx_def(onnx_file: impl AsRef<OsStr>) -> Result<crate::dnn::Net> {
+		path_arg!(onnx_file);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_dnn_readNetFromONNX_const_StringR(onnx_file.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1287,8 +1287,8 @@ pub mod dnn {
 	/// ## C++ default parameters
 	/// * engine: ENGINE_AUTO
 	#[inline]
-	pub fn read_net_from_onnx(onnx_file: &str, engine: i32) -> Result<crate::dnn::Net> {
-		extern_container_arg!(onnx_file);
+	pub fn read_net_from_onnx(onnx_file: impl AsRef<OsStr>, engine: i32) -> Result<crate::dnn::Net> {
+		path_arg!(onnx_file);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_dnn_readNetFromONNX_const_StringR_int(onnx_file.opencv_as_extern(), engine, ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1819,8 +1819,8 @@ pub mod dnn {
 	/// ## Returns
 	/// Mat.
 	#[inline]
-	pub fn read_tensor_from_onnx(path: &str) -> Result<core::Mat> {
-		extern_container_arg!(path);
+	pub fn read_tensor_from_onnx(path: impl AsRef<OsStr>) -> Result<core::Mat> {
+		path_arg!(path);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_dnn_readTensorFromONNX_const_StringR(path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -19957,8 +19957,8 @@ pub mod dnn {
 		/// ## See also
 		/// dump()
 		#[inline]
-		fn dump_to_file(&mut self, path: &str) -> Result<()> {
-			extern_container_arg!(path);
+		fn dump_to_file(&mut self, path: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_dnn_Net_dumpToFile_const_StringR(self.as_raw_mut_Net(), path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -19973,8 +19973,8 @@ pub mod dnn {
 		/// Use Netron (<https://netron.app>) to open the target file to visualize the model.
 		/// Call method after setInput(). To see correct backend, target and fusion run after forward().
 		#[inline]
-		fn dump_to_pbtxt(&mut self, path: &str) -> Result<()> {
-			extern_container_arg!(path);
+		fn dump_to_pbtxt(&mut self, path: impl AsRef<OsStr>) -> Result<()> {
+			path_arg!(path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_dnn_Net_dumpToPbtxt_const_StringR(self.as_raw_mut_Net(), path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

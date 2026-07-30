@@ -998,8 +998,8 @@ pub mod video {
 	/// Resulting Mat has a type CV_32FC2 - floating-point, 2-channel. First channel corresponds to the
 	/// flow in the horizontal direction (u), second - vertical (v).
 	#[inline]
-	pub fn read_optical_flow(path: &str) -> Result<core::Mat> {
-		extern_container_arg!(path);
+	pub fn read_optical_flow(path: impl AsRef<OsStr>) -> Result<core::Mat> {
+		path_arg!(path);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_readOpticalFlow_const_StringR(path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 		return_receive!(ocvrs_return => ret);
@@ -1018,8 +1018,8 @@ pub mod video {
 	/// The flow field must be a 2-channel, floating-point matrix (CV_32FC2). First channel corresponds
 	/// to the flow in the horizontal direction (u), second - vertical (v).
 	#[inline]
-	pub fn write_optical_flow(path: &str, flow: &impl ToInputArray) -> Result<bool> {
-		extern_container_arg!(path);
+	pub fn write_optical_flow(path: impl AsRef<OsStr>, flow: &impl ToInputArray) -> Result<bool> {
+		path_arg!(path);
 		input_array_arg!(flow);
 		return_send!(via ocvrs_return);
 		unsafe { sys::cv_writeOpticalFlow_const_StringR_const__InputArrayR(path.opencv_as_extern(), flow.as_raw__InputArray(), ocvrs_return.as_mut_ptr()) };

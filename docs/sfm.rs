@@ -398,8 +398,8 @@ pub mod sfm {
 	/// This alternative version of [import_reconstruction] function uses the following default values for its arguments:
 	/// * file_format: SFM_IO_BUNDLER
 	#[inline]
-	pub fn import_reconstruction_def(file: &str, rs: &mut impl ToOutputArray, ts: &mut impl ToOutputArray, ks: &mut impl ToOutputArray, points3d: &mut impl ToOutputArray) -> Result<()> {
-		extern_container_arg!(file);
+	pub fn import_reconstruction_def(file: impl AsRef<OsStr>, rs: &mut impl ToOutputArray, ts: &mut impl ToOutputArray, ks: &mut impl ToOutputArray, points3d: &mut impl ToOutputArray) -> Result<()> {
+		path_arg!(file);
 		output_array_arg!(rs);
 		output_array_arg!(ts);
 		output_array_arg!(ks);
@@ -425,8 +425,8 @@ pub mod sfm {
 	/// ## C++ default parameters
 	/// * file_format: SFM_IO_BUNDLER
 	#[inline]
-	pub fn import_reconstruction(file: &str, rs: &mut impl ToOutputArray, ts: &mut impl ToOutputArray, ks: &mut impl ToOutputArray, points3d: &mut impl ToOutputArray, file_format: i32) -> Result<()> {
-		extern_container_arg!(file);
+	pub fn import_reconstruction(file: impl AsRef<OsStr>, rs: &mut impl ToOutputArray, ts: &mut impl ToOutputArray, ks: &mut impl ToOutputArray, points3d: &mut impl ToOutputArray, file_format: i32) -> Result<()> {
+		path_arg!(file);
 		output_array_arg!(rs);
 		output_array_arg!(ts);
 		output_array_arg!(ks);

@@ -39,9 +39,9 @@ pub mod wechat_qrcode {
 		/// * detector_model_path: ""
 		/// * super_resolution_model_path: ""
 		#[inline]
-		pub fn new(detector_model_path: &str, super_resolution_model_path: &str) -> Result<crate::wechat_qrcode::WeChatQRCode> {
-			extern_container_arg!(detector_model_path);
-			extern_container_arg!(super_resolution_model_path);
+		pub fn new(detector_model_path: impl AsRef<OsStr>, super_resolution_model_path: impl AsRef<OsStr>) -> Result<crate::wechat_qrcode::WeChatQRCode> {
+			path_arg!(detector_model_path);
+			path_arg!(super_resolution_model_path);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_wechat_qrcode_WeChatQRCode_WeChatQRCode_const_stringR_const_stringR(detector_model_path.opencv_as_extern(), super_resolution_model_path.opencv_as_extern(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

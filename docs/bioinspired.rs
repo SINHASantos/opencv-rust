@@ -259,8 +259,8 @@ pub mod bioinspired {
 		/// * retina_parameter_file: ""
 		/// * apply_default_setup_on_failure: true
 		#[inline]
-		fn setup_from_file(&mut self, retina_parameter_file: &str, apply_default_setup_on_failure: bool) -> Result<()> {
-			extern_container_arg!(retina_parameter_file);
+		fn setup_from_file(&mut self, retina_parameter_file: impl AsRef<OsStr>, apply_default_setup_on_failure: bool) -> Result<()> {
+			path_arg!(retina_parameter_file);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_bioinspired_Retina_setup_String_const_bool(self.as_raw_mut_Retina(), retina_parameter_file.opencv_as_extern(), apply_default_setup_on_failure, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);
@@ -1276,8 +1276,8 @@ pub mod bioinspired {
 		/// * segmentation_parameter_file: ""
 		/// * apply_default_setup_on_failure: true
 		#[inline]
-		fn setup_from_file(&mut self, segmentation_parameter_file: &str, apply_default_setup_on_failure: bool) -> Result<()> {
-			extern_container_arg!(segmentation_parameter_file);
+		fn setup_from_file(&mut self, segmentation_parameter_file: impl AsRef<OsStr>, apply_default_setup_on_failure: bool) -> Result<()> {
+			path_arg!(segmentation_parameter_file);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_bioinspired_TransientAreasSegmentationModule_setup_String_const_bool(self.as_raw_mut_TransientAreasSegmentationModule(), segmentation_parameter_file.opencv_as_extern(), apply_default_setup_on_failure, ocvrs_return.as_mut_ptr()) };
 			return_receive!(ocvrs_return => ret);

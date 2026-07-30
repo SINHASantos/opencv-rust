@@ -163,17 +163,21 @@ impl<'tu, 'ge> Class<'tu, 'ge> {
 		match self {
 			&Self::Clang { entity, gen_env, .. } => {
 				if !self.has_methods() && !self.has_fields() && !self.has_descendants() && !self.has_bases() {
-					let children = entity.get_children();
-					if let [single] = children.as_slice() {
-						if matches!(single.get_kind(), EntityKind::EnumDecl) {
-							Some(Enum::new_ext(
-								*single,
-								self.cpp_name(CppNameStyle::Declaration).as_ref(),
-								gen_env,
-							))
-						} else {
-							None
-						}
+					let mut actual_children = entity
+						.get_children()
+						.into_iter()
+						.filter(|child| !matches!(child.get_kind(), EntityKind::AccessSpecifier | EntityKind::VisibilityAttr)); // filter out things that are just modifiers
+					let first_child = actual_children.next();
+					let second_child = actual_children.next();
+					if let Some(single) = first_child
+						&& second_child.is_none()
+						&& matches!(single.get_kind(), EntityKind::EnumDecl)
+					{
+						Some(Enum::new_ext(
+							single,
+							self.cpp_name(CppNameStyle::Declaration).as_ref(),
+							gen_env,
+						))
 					} else {
 						None
 					}

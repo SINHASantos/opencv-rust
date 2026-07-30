@@ -56,7 +56,7 @@ mod abstract_ref_wrapper;
 mod class;
 pub mod comment;
 mod constant;
-mod debug;
+pub mod debug;
 mod element;
 mod entity;
 mod enumeration;

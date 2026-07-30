@@ -727,7 +727,7 @@ impl<'me> NameDebug<'me> for &'me Func<'_, '_> {
 	where
 		Self: Sized,
 	{
-		if *debug::EMIT_DEBUG {
+		if debug::enabled() {
 			let LocationName { location, name } = self.file_line_name();
 			let render_lanes = self
 				.arguments()

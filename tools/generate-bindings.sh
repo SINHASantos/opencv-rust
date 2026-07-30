@@ -92,8 +92,6 @@ all_modules="alphamat
 	xstereo
 "
 
-export OPENCV_BINDING_GENERATOR_EMIT_DEBUG=1
-
 # Generate bindings for a specific OpenCV version
 # Arguments: $1 = version, remaining args = optional module override
 generate_version() {
@@ -129,7 +127,7 @@ generate_version() {
 		rm -f "$out_dir"/???-"$module"-*.type.cpp "$out_dir"/???-"$module"-*.type.rs "$out_dir"/???-"$module"-*.type.externs.rs
 	done
 
-	parallel --eta "$script_dir/../target/release/binding-generator" --debug "$header_dir" "$SRC_CPP_DIR" "$out_dir" "{}" "$additional_include_dirs" ::: $modules
+	parallel --eta "$script_dir/../target/release/binding-generator" "--debug=$opencv_lib_base_dir" "$header_dir" "$SRC_CPP_DIR" "$out_dir" "{}" "$additional_include_dirs" ::: $modules
 }
 
 generate_version "4" $*

@@ -20,7 +20,7 @@ use crate::name_pool::NamePool;
 use crate::type_ref::{Constness, CppNameStyle, FishStyle, NameStyle};
 use crate::{
 	Class, CompiledInterpolation, Const, Element, Enum, Func, GeneratedType, GeneratorVisitor, IteratorExt, StrExt,
-	SupportedModule, Typedef, opencv_module_from_path, settings,
+	SupportedModule, Typedef, debug, opencv_module_from_path, settings,
 };
 
 mod abstract_ref_wrapper;
@@ -46,7 +46,6 @@ type UniqueEntries = HashMap<String, String>;
 /// Writer of the source files used when building OpenCV to run on a native platform (as opposed to for example WASM)
 #[derive(Clone, Debug)]
 pub struct RustNativeBindingWriter {
-	debug: bool,
 	src_cpp_dir: PathBuf,
 	module: SupportedModule,
 	opencv_version: Version,
@@ -66,23 +65,13 @@ pub struct RustNativeBindingWriter {
 }
 
 impl RustNativeBindingWriter {
-	pub fn new(
-		src_cpp_dir: &Path,
-		out_dir: impl Into<PathBuf>,
-		module: SupportedModule,
-		opencv_version: Version,
-		debug: bool,
-	) -> Self {
+	pub fn new(src_cpp_dir: &Path, out_dir: impl Into<PathBuf>, module: SupportedModule, opencv_version: Version) -> Self {
 		let out_dir = out_dir.into();
 		let debug_path = out_dir.join(format!("{}.log", module.opencv_name()));
-		#[expect(clippy::collapsible_if)]
-		if false {
-			if debug {
-				File::create(&debug_path).expect("Can't create debug log");
-			}
+		if false && debug::enabled() {
+			File::create(&debug_path).expect("Can't create debug log");
 		}
 		Self {
-			debug,
 			src_cpp_dir: canonicalize(src_cpp_dir).expect("Can't canonicalize src_cpp_dir"),
 			module,
 			opencv_version,
@@ -103,15 +92,12 @@ impl RustNativeBindingWriter {
 	}
 
 	fn emit_debug_log(&mut self, obj: &impl Debug) {
-		#[expect(clippy::collapsible_if)]
-		if false {
-			if self.debug {
-				let mut f = OpenOptions::new()
-					.append(true)
-					.open(&self.debug_path)
-					.expect("Can't open debug file");
-				writeln!(f, "{obj:#?}").expect("Can't write debug info");
-			}
+		if false && debug::enabled() {
+			let mut f = OpenOptions::new()
+				.append(true)
+				.open(&self.debug_path)
+				.expect("Can't open debug file");
+			writeln!(f, "{obj:#?}").expect("Can't write debug info");
 		}
 	}
 }

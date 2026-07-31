@@ -36,6 +36,7 @@ include!(concat!(env!("OUT_DIR"), "/opencv/line_descriptor.rs"));
 include!(concat!(env!("OUT_DIR"), "/opencv/ml.rs"));
 include!(concat!(env!("OUT_DIR"), "/opencv/objdetect.rs"));
 include!(concat!(env!("OUT_DIR"), "/opencv/optflow.rs"));
+include!(concat!(env!("OUT_DIR"), "/opencv/ovis.rs"));
 include!(concat!(env!("OUT_DIR"), "/opencv/phase_unwrapping.rs"));
 include!(concat!(env!("OUT_DIR"), "/opencv/photo.rs"));
 include!(concat!(env!("OUT_DIR"), "/opencv/plot.rs"));
@@ -112,6 +113,7 @@ pub mod hub_prelude {
 	pub use super::ml::prelude::*;
 	pub use super::objdetect::prelude::*;
 	pub use super::optflow::prelude::*;
+	pub use super::ovis::prelude::*;
 	pub use super::phase_unwrapping::prelude::*;
 	pub use super::photo::prelude::*;
 	pub use super::plot::prelude::*;
@@ -144,6 +146,6 @@ pub mod hub_prelude {
 
 mod ffi_exports {
 	use crate::mod_prelude_sys::*;
-	#[unsafe(no_mangle)] unsafe extern "C" fn ocvrs_create_string_0_100_0(s: *const c_char) -> *mut String { unsafe { crate::templ::ocvrs_create_string(s) } }
-	#[unsafe(no_mangle)] unsafe extern "C" fn ocvrs_create_byte_string_0_100_0(v: *const u8, len: size_t) -> *mut Vec<u8> { unsafe { crate::templ::ocvrs_create_byte_string(v, len) } }
+	#[unsafe(no_mangle)] unsafe extern "C" fn ocvrs_create_string_0_100_1(s: *const c_char) -> *mut String { unsafe { crate::templ::ocvrs_create_string(s) } }
+	#[unsafe(no_mangle)] unsafe extern "C" fn ocvrs_create_byte_string_0_100_1(v: *const u8, len: size_t) -> *mut Vec<u8> { unsafe { crate::templ::ocvrs_create_byte_string(v, len) } }
 }
